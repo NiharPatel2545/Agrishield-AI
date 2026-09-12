@@ -11,33 +11,50 @@ def live_model_inputs(latitude: float, longitude: float) -> dict:
     gets handed to model.predict_proba(). Anything this function can't
     fill comes back as None, and the model's imputer (median-fill, fit at
     training time) covers the gap -- same behaviour as a missing lab value.
+
+    Copies EVERY key present in each GEE response, not a hand-picked
+    subset -- a prior version hardcoded which keys to copy from each
+    source (six of nine Sentinel bands, four of five static-soil keys,
+    two of four WorldClim keys) and silently dropped the rest to None on
+    every single live call, regardless of what GEE actually returned.
+    Copying by iterating FEATURE_COLUMNS itself means adding a column to
+    config.py is enough -- no second list to remember to update here.
     """
     gee.initialize()
     today = date.today()
-    window_start = (today - timedelta(days=30)).isoformat()
+    # 365 days, not 30. Training builds one full-calendar-year cloud-free
+    # median composite per sample_year (climate.attach_sentinel_batched) --
+    # a 30-day window here was a real train/serve mismatch: the model was
+    # fit on year-long medians but served on a month-long one, which is a
+    # different aggregation of a different-sized cloud/season mix. A
+    # rolling 365-day window is the closest live equivalent to "a year's
+    # median" without needing a fixed calendar year at request time.
+    window_start = (today - timedelta(days=365)).isoformat()
     window_end = today.isoformat()
 
     out = {col: None for col in FEATURE_COLUMNS}
+
     try:
         bands = gee.sentinel2_features(longitude, latitude, window_start, window_end)
-        for col in ["B2", "B3", "B4", "B8", "B11", "ndvi"]:
-            if col in bands:
-                out[col] = bands[col]
+        for col, val in bands.items():
+            if col in out:
+                out[col] = val
     except Exception as exc:
         out["_sentinel_error"] = str(exc)
 
     try:
         soil = gee.static_soil_at_point(longitude, latitude)
-        for col in ["clay_pct", "sand_pct", "silt_pct", "elevation_m"]:
-            if col in soil:
-                out[col] = soil[col]
+        for col, val in soil.items():
+            if col in out:
+                out[col] = val
     except Exception as exc:
         out["_soil_error"] = str(exc)
 
     try:
         clim = gee.worldclim_at_point(longitude, latitude)
-        out["tmean_c"] = clim.get("tmean_c")
-        out["precip_mm"] = clim.get("precip_mm")
+        for col, val in clim.items():
+            if col in out:
+                out[col] = val
     except Exception as exc:
         out["_climate_error"] = str(exc)
 

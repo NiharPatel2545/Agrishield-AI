@@ -4,7 +4,7 @@ import ee
 
 from agrishield.config import GEE_PROJECT_ID
 
-SENTINEL_BANDS = ["B2", "B3", "B4", "B8", "B11"]
+SENTINEL_BANDS = ["B2", "B3", "B4", "B5", "B6", "B7", "B8", "B11", "B12"]
 
 # OpenLandMap surface (0 cm) texture fraction layers — global, static, free.
 # NOTE: there is no SILT_IMG. OpenLandMap published a silt layer on Zenodo but
@@ -49,16 +49,18 @@ def sentinel2_features(longitude: float, latitude: float, start: str, end: str) 
 
 
 def worldclim_at_point(longitude: float, latitude: float) -> dict:
-    """Long-term climate (bio01 = mean temp * 10, bio12 = annual precip mm)."""
+    """Long-term climate: mean temp, temp seasonality, annual precip, precip seasonality."""
     point = ee.Geometry.Point([longitude, latitude])
-    image = ee.Image("WORLDCLIM/V1/BIO").select(["bio01", "bio12"])
+    image = ee.Image("WORLDCLIM/V1/BIO").select(["bio01", "bio04", "bio12", "bio15"])
     sample = image.sample(point, 1000).first()
     info = sample.getInfo() if sample else None
     props = info.get("properties", {}) if info else {}
     tmean = props.get("bio01")
     return {
         "tmean_c": None if tmean is None else tmean / 10.0,
+        "temp_seasonality": props.get("bio04"),
         "precip_mm": props.get("bio12"),
+        "precip_seasonality": props.get("bio15"),
     }
 
 
@@ -73,7 +75,8 @@ def static_soil_at_point(longitude: float, latitude: float) -> dict:
     clay = ee.Image(CLAY_IMG).select("b0").rename("clay_pct")
     sand = ee.Image(SAND_IMG).select("b0").rename("sand_pct")
     elev = ee.Image(ELEVATION_IMG).select("elevation").rename("elevation_m")
-    stack = clay.addBands([sand, elev])
+    slope = ee.Terrain.slope(ee.Image(ELEVATION_IMG)).rename("slope_deg")
+    stack = clay.addBands([sand, elev, slope])
     sample = stack.sample(point, 250).first()
     info = sample.getInfo() if sample else None
     props = info.get("properties", {}) if info else {}

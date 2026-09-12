@@ -13,6 +13,7 @@ import ee
 import pandas as pd
 
 from agrishield.config import TRAINING_CSV
+from agrishield.dataset import drop_gee_dead_rows
 from agrishield.gee import (
     CLAY_IMG,
     ELEVATION_IMG,
@@ -48,6 +49,15 @@ def _sample_image_batch(batch: pd.DataFrame, image: ee.Image) -> pd.DataFrame:
 def _run_batches(df: pd.DataFrame, ids: list[int], image: ee.Image,
                   batch_size: int, out_cols: list[str], pause_s: float) -> pd.DataFrame:
     work = df.copy()
+    # Force these columns to a nullable float dtype up front. Without this,
+    # a batch that comes back entirely empty assigns an all-None array into
+    # a float64 column, which pandas now warns about (and will hard-error
+    # on in a future version) -- "Float64" (nullable) accepts None natively.
+    for col in out_cols:
+        if col in work.columns:
+            work[col] = work[col].astype("Float64")
+
+    failed_batches: list[tuple[int, int]] = []
     for start in range(0, len(ids), batch_size):
         chunk_ids = ids[start : start + batch_size]
         batch = work.loc[chunk_ids, ["latitude", "longitude"]]
@@ -55,15 +65,31 @@ def _run_batches(df: pd.DataFrame, ids: list[int], image: ee.Image,
             result = _sample_image_batch(batch, image)
         except Exception:
             time.sleep(2)
-            result = _sample_image_batch(batch, image)
+            try:
+                result = _sample_image_batch(batch, image)
+            except Exception as exc:
+                # Both attempts failed outright (not just an empty result) --
+                # record it instead of silently moving on, so you can tell
+                # "no data at these coordinates" apart from "GEE call broke".
+                failed_batches.append((start, start + len(chunk_ids)))
+                print(f"  BATCH FAILED rows {start}-{start + len(chunk_ids)}: {exc}")
+                time.sleep(pause_s)
+                continue
         if result.empty or "row_id" not in result.columns:
+            failed_batches.append((start, start + len(chunk_ids)))
+            print(f"  BATCH EMPTY rows {start}-{start + len(chunk_ids)} (no rows returned)")
+            time.sleep(pause_s)
             continue
         result = result.dropna(subset=["row_id"]).set_index("row_id")
         for col in out_cols:
             if col in result.columns:
-                work.loc[result.index, col] = result[col]
+                work.loc[result.index, col] = result[col].astype("Float64")
         print(f"  rows {start}-{start + len(chunk_ids)} / {len(ids)}")
         time.sleep(pause_s)
+
+    if failed_batches:
+        print(f"  -> {len(failed_batches)} batch(es) returned nothing usable "
+              f"({sum(b - a for a, b in failed_batches)} rows affected): {failed_batches}")
     return work
 
 
@@ -71,12 +97,15 @@ def attach_worldclim(df: pd.DataFrame, batch_size: int = 400, pause_s: float = 0
     """Add tmean_c and precip_mm. Same rows, extra columns."""
     initialize()
     work = df.copy()
-    if "tmean_c" not in work.columns:
-        work["tmean_c"] = pd.NA
-        work["precip_mm"] = pd.NA
-    image = ee.Image("WORLDCLIM/V1/BIO").select(["bio01", "bio12"], ["tmean_c", "precip_mm"])
+    out_cols = ["tmean_c", "temp_seasonality", "precip_mm", "precip_seasonality"]
+    for col in out_cols:
+        if col not in work.columns:
+            work[col] = pd.NA
+    image = ee.Image("WORLDCLIM/V1/BIO").select(
+        ["bio01", "bio04", "bio12", "bio15"], out_cols
+    )
     pending = work[work["tmean_c"].isna() & work["latitude"].notna() & work["longitude"].notna()]
-    work = _run_batches(work, list(pending.index), image, batch_size, ["tmean_c", "precip_mm"], pause_s)
+    work = _run_batches(work, list(pending.index), image, batch_size, out_cols, pause_s)
     # bio01 is temp * 10 in the raw layer; the renamed sample already applies no scaling,
     # so divide here once, after sampling.
     mask = work["tmean_c"].notna()
@@ -99,13 +128,14 @@ def attach_static_soil(df: pd.DataFrame, batch_size: int = 400, pause_s: float =
     work = df.copy()
     # silt_pct is NOT sampled from GEE -- see gee.py note: OpenLandMap never
     # published a silt image to the EE catalog. It's derived below instead.
-    out_cols = ["clay_pct", "sand_pct", "elevation_m"]
+    out_cols = ["clay_pct", "sand_pct", "elevation_m", "slope_deg"]
     work["_soil_pending"] = work["latitude"].notna() & work["longitude"].notna()
 
     clay = ee.Image(CLAY_IMG).select("b0").rename("clay_pct")
     sand = ee.Image(SAND_IMG).select("b0").rename("sand_pct")
     elev = ee.Image(ELEVATION_IMG).select("elevation").rename("elevation_m")
-    stack = clay.addBands([sand, elev])
+    slope = ee.Terrain.slope(ee.Image(ELEVATION_IMG)).rename("slope_deg")
+    stack = clay.addBands([sand, elev, slope])
 
     ids = list(work[work["_soil_pending"]].index)
     work = _run_batches(work, ids, stack, batch_size, out_cols, pause_s)
@@ -144,10 +174,22 @@ def attach_sentinel_batched(
         if col not in work.columns:
             work[col] = pd.NA
 
+    # Sentinel-2 launched mid-2015 (COPERNICUS/S2_SR_HARMONIZED has no usable
+    # coverage before then). Years before this can NEVER return real bands --
+    # querying them just burns GEE quota and time for a guaranteed-empty
+    # result, and would do so again on every future re-run/resume. Skip them
+    # outright; the imputer covers these rows at train time, same as any
+    # other missing feature.
+    MIN_SENTINEL_YEAR = 2016  # 2015 itself has only partial-year coverage
     years = sorted(
         y for y in work[year_col].dropna().unique()
-        if pd.notna(y)
+        if pd.notna(y) and int(y) >= MIN_SENTINEL_YEAR
     )
+    skipped = (work[year_col].notna() & (work[year_col] < MIN_SENTINEL_YEAR)).sum()
+    if skipped:
+        print(f"Skipping {skipped} rows with sample_year < {MIN_SENTINEL_YEAR} "
+              f"(no Sentinel-2 coverage exists -- not a failure, just physically impossible)")
+
     for year in years:
         year = int(year)
         start, end = f"{year}-01-01", f"{year}-12-31"
@@ -203,5 +245,12 @@ def enrich_training_csv(batch_size: int = 400, max_rows: int | None = None) -> p
     df = pd.concat([subset, rest], ignore_index=True) if max_rows is not None else subset
     df.to_csv(TRAINING_CSV, index=False)
     print("checkpoint saved after sentinel")
+
+    before = len(df)
+    df = drop_gee_dead_rows(df)
+    dropped = before - len(df)
+    if dropped:
+        print(f"dropped {dropped} rows with zero usable GEE/climate signal")
+        df.to_csv(TRAINING_CSV, index=False)
 
     return df

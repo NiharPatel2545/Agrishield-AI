@@ -25,11 +25,12 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
 # brand-new coordinate with NO lab test. This is the actual hard constraint the
 # model has to satisfy. Do not add a lab/survey-only column here.
 FEATURE_COLUMNS = [
-    "B2", "B3", "B4", "B8", "B11",   # Sentinel-2 bands, live
-    "ndvi",                            # derived from B8/B4, live
-    "elevation_m",                     # SRTM, live (NOT the LUCAS survey column)
-    "clay_pct", "sand_pct", "silt_pct",  # OpenLandMap static maps, live
-    "tmean_c", "precip_mm",            # WorldClim climatology, live
+    "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B11", "B12",  # Sentinel-2 bands, live
+    "ndvi",                              # derived from B8/B4, live
+    "elevation_m", "slope_deg",          # SRTM + derived terrain, live
+    "clay_pct", "sand_pct", "silt_pct",  # OpenLandMap static maps, live (silt derived)
+    "tmean_c", "temp_seasonality",       # WorldClim climatology, live
+    "precip_mm", "precip_seasonality",   # WorldClim climatology, live
 ]
 # Lab-only columns (oc_gkg, n_gkg, p_mgkg, k_mgkg, ec, caco3, bd_0_20,
 # cec_ph7, totc_gkg) may only ever be a TARGET, never a feature — no live

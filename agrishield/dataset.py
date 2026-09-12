@@ -184,7 +184,11 @@ def load_lucas_2015() -> pd.DataFrame:
     )
 
 
-def load_wosis_property(path: Path, stem: str, max_upper_depth: int = 30) -> pd.DataFrame:
+def load_wosis_property(path: Path, stem: str, max_upper_depth: int = 20) -> pd.DataFrame:
+    # 20cm, not 30 -- matches LUCAS's own 0-20cm topsoil sampling convention.
+    # Satellite reflectance still only "sees" the top few mm/cm, so this does
+    # NOT make the satellite/lab depth mismatch disappear -- it just stops
+    # WoSIS and LUCAS disagreeing with each other about what "topsoil" means.
     chunks = []
     for chunk in pd.read_csv(path, sep="\t", usecols=WOSIS_COLS, chunksize=150_000, low_memory=False):
         top = chunk[(chunk["upper_depth"] < max_upper_depth) & chunk["value_avg"].notna()]
@@ -198,10 +202,20 @@ def load_wosis_property(path: Path, stem: str, max_upper_depth: int = 30) -> pd.
 
 
 def wosis_property_files() -> list[tuple[str, Path]]:
+    """Only load .tsv files that are actually mapped in WOSIS_CANONICAL.
+
+    Previously this globbed every wosis_202312_*.tsv not in WOSIS_SKIP --
+    ~30 files, many hundreds of MB each -- even though only the ~12 files
+    in WOSIS_CANONICAL are ever used downstream (config.py). The rest were
+    loaded, merged, and left as dead unused columns. Restricting the glob
+    to WOSIS_CANONICAL keys cuts load time and RAM by roughly two-thirds
+    with zero change to the resulting training columns.
+    """
     files = []
+    wanted = set(WOSIS_CANONICAL.keys())
     for path in sorted(WOSIS_DIR.glob("wosis_202312_*.tsv")):
         stem = path.stem.replace("wosis_202312_", "")
-        if stem not in WOSIS_SKIP:
+        if stem in wanted and stem not in WOSIS_SKIP:
             files.append((stem, path))
     return files
 
@@ -292,6 +306,30 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
             ((df["acidic"].fillna(0) == 1) | (df["low_oc"].fillna(0) == 1)).astype(float),
         )
     return df.reset_index(drop=True)
+
+
+def drop_gee_dead_rows(df: pd.DataFrame) -> pd.DataFrame:
+    """Run ONCE, after enrich_training_csv() finishes -- never before.
+
+    Drops rows where every single GEE/climate column came back empty (failed
+    GEE lookup -- e.g. coastal point with no valid pixel, bad coordinate).
+    Rows just missing the SATELLITE columns because they predate 2015 are
+    NOT dropped here -- they still have valid texture/climate columns, which
+    is real usable signal. This only removes rows with zero usable feature
+    signal from GEE at all.
+
+    Do NOT call this before enrich_training_csv() -- these columns won't
+    exist yet and this will silently drop nothing.
+    """
+    candidate_cols = [
+        "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B11", "B12", "ndvi",
+        "elevation_m", "slope_deg", "clay_pct", "sand_pct", "silt_pct",
+        "tmean_c", "temp_seasonality", "precip_mm", "precip_seasonality",
+    ]
+    gee_cols = [c for c in candidate_cols if c in df.columns]
+    if not gee_cols:
+        return df
+    return df.dropna(subset=gee_cols, how="all").reset_index(drop=True)
 
 
 def build_training_csv(out_path: Path | None = None) -> pd.DataFrame:
