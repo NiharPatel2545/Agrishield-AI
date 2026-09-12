@@ -1,6 +1,13 @@
 .env
-.ipynb_checkpoints/
-__pycache__/
+*.csv
 *.pyc
+.DS_Store
 agrishield/__pycache__/
+__pycache__/
+.ipynb_checkpoints/
+LUCAS 2009/
+LUCAS 2015/
+LUCAS 2018/
+WoSIS/
+data/
 models/*.joblib
