@@ -1,3 +1,10 @@
+"""Attach satellite/climate columns to the training table.
+
+Run ONCE, offline, to build agrishield_training.csv into its final form
+before training. This is never called at farmer-inference time — that
+uses gee.py functions directly on one coordinate (see inference.py).
+"""
+
 from __future__ import annotations
 
 import time
@@ -11,19 +18,29 @@ from agrishield.gee import (
     ELEVATION_IMG,
     SAND_IMG,
     SENTINEL_BANDS,
-    SILT_IMG,
     initialize,
 )
 
 
 def _sample_image_batch(batch: pd.DataFrame, image: ee.Image) -> pd.DataFrame:
-    """Sample one ee.Image at every (lat, lon) in `batch` in a single call."""
+    """Sample one ee.Image at every (lat, lon) in `batch` in a single call.
+
+    Uses per-point reduceRegion() rather than sampleRegions() -- this
+    mirrors the exact call that already works for a single live point
+    (see gee.py), just wrapped into one FeatureCollection so it's still
+    ONE network round trip for the whole batch, not one per row.
+    sampleRegions() was silently returning near-empty results at scale
+    (0.3% fill on a real smoke test) with no exception raised.
+    """
     features = []
     for row_id, row in batch.iterrows():
-        geom = ee.Geometry.Point([float(row["longitude"]), float(row["latitude"])])
-        features.append(ee.Feature(geom, {"row_id": int(row_id)}))
+        point = ee.Geometry.Point([float(row["longitude"]), float(row["latitude"])])
+        values = image.reduceRegion(
+            reducer=ee.Reducer.first(), geometry=point, scale=20, maxPixels=1e9
+        )
+        features.append(ee.Feature(None, values.set("row_id", int(row_id))))
     collection = ee.FeatureCollection(features)
-    sampled = image.sampleRegions(collection=collection, scale=250, geometries=False).getInfo()
+    sampled = collection.getInfo()
     records = [feat.get("properties", {}) for feat in sampled.get("features", [])]
     return pd.DataFrame.from_records(records)
 
@@ -45,7 +62,7 @@ def _run_batches(df: pd.DataFrame, ids: list[int], image: ee.Image,
         for col in out_cols:
             if col in result.columns:
                 work.loc[result.index, col] = result[col]
-        print(f"  rows {start}-{start + len(chunk_ids)} / {len(ids)}", end="\r")
+        print(f"  rows {start}-{start + len(chunk_ids)} / {len(ids)}")
         time.sleep(pause_s)
     return work
 
@@ -80,18 +97,25 @@ def attach_static_soil(df: pd.DataFrame, batch_size: int = 400, pause_s: float =
     """
     initialize()
     work = df.copy()
-    out_cols = ["clay_pct", "sand_pct", "silt_pct", "elevation_m"]
+    # silt_pct is NOT sampled from GEE -- see gee.py note: OpenLandMap never
+    # published a silt image to the EE catalog. It's derived below instead.
+    out_cols = ["clay_pct", "sand_pct", "elevation_m"]
     work["_soil_pending"] = work["latitude"].notna() & work["longitude"].notna()
 
     clay = ee.Image(CLAY_IMG).select("b0").rename("clay_pct")
     sand = ee.Image(SAND_IMG).select("b0").rename("sand_pct")
-    silt = ee.Image(SILT_IMG).select("b0").rename("silt_pct")
     elev = ee.Image(ELEVATION_IMG).select("elevation").rename("elevation_m")
-    stack = clay.addBands([sand, silt, elev])
+    stack = clay.addBands([sand, elev])
 
     ids = list(work[work["_soil_pending"]].index)
     work = _run_batches(work, ids, stack, batch_size, out_cols, pause_s)
-    return work.drop(columns=["_soil_pending"])
+    work = work.drop(columns=["_soil_pending"])
+
+    if "silt_pct" not in work.columns:
+        work["silt_pct"] = pd.NA
+    have_both = work["clay_pct"].notna() & work["sand_pct"].notna()
+    work.loc[have_both, "silt_pct"] = 100.0 - work.loc[have_both, "clay_pct"] - work.loc[have_both, "sand_pct"]
+    return work
 
 
 def attach_sentinel_batched(
@@ -152,15 +176,32 @@ def attach_sentinel_batched(
 
 
 def enrich_training_csv(batch_size: int = 400, max_rows: int | None = None) -> pd.DataFrame:
-    """Attach WorldClim + static soil + Sentinel-2, then overwrite the CSV."""
+    """Attach WorldClim + static soil + Sentinel-2, saving to disk after each stage.
+
+    Checkpointed: if this crashes partway (GEE quota, network blip, laptop
+    sleep), the CSV on disk already has whatever stages finished before the
+    crash. Re-running enrich_training_csv() picks up where it left off,
+    because attach_worldclim/attach_static_soil only touch rows that are
+    still NaN (see the `.isna()` masks inside each attach_* function) --
+    already-filled rows are skipped, not re-fetched.
+    """
     df = pd.read_csv(TRAINING_CSV, low_memory=False)
     subset = df.iloc[:max_rows] if max_rows is not None else df
     rest = df.iloc[max_rows:] if max_rows is not None else df.iloc[0:0]
 
     subset = attach_worldclim(subset, batch_size=batch_size)
-    subset = attach_static_soil(subset, batch_size=batch_size)
-    subset = attach_sentinel_batched(subset, batch_size=batch_size)
-
     df = pd.concat([subset, rest], ignore_index=True) if max_rows is not None else subset
     df.to_csv(TRAINING_CSV, index=False)
+    print("checkpoint saved after worldclim")
+
+    subset = attach_static_soil(subset, batch_size=batch_size)
+    df = pd.concat([subset, rest], ignore_index=True) if max_rows is not None else subset
+    df.to_csv(TRAINING_CSV, index=False)
+    print("checkpoint saved after static soil")
+
+    subset = attach_sentinel_batched(subset, batch_size=batch_size)
+    df = pd.concat([subset, rest], ignore_index=True) if max_rows is not None else subset
+    df.to_csv(TRAINING_CSV, index=False)
+    print("checkpoint saved after sentinel")
+
     return df

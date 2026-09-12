@@ -7,6 +7,7 @@ import pandas as pd
 
 from agrishield.config import (
     DATA_DIR,
+    LUCAS_2009,
     LUCAS_2015,
     LUCAS_2018,
     LUCAS_BD,
@@ -110,6 +111,36 @@ def load_lucas_2018() -> pd.DataFrame:
             "nuts1": raw["NUTS_1"],
             "nuts2": raw["NUTS_2"],
             "nuts3": raw["NUTS_3"],
+        }
+    )
+
+
+def load_lucas_2009() -> pd.DataFrame:
+    """1st LUCAS soil campaign. Has its own coordinates (unlike 2015)."""
+    raw = pd.read_excel(LUCAS_2009)
+    _numeric_cols(raw, ["GPS_LAT", "GPS_LONG", "pH_in_H2O", "pH_in_CaCl2",
+                         "OC", "CaCO3", "N", "P", "K", "CEC", "clay", "sand", "silt", "coarse"])
+    return pd.DataFrame(
+        {
+            "source": "lucas_2009",
+            "sample_id": raw["POINT_ID"].astype(str),
+            "latitude": raw["GPS_LAT"],
+            "longitude": raw["GPS_LONG"],
+            "country": pd.NA,
+            "continent": "Europe",
+            "sample_year": 2009,
+            "ph_h2o": raw["pH_in_H2O"],
+            "ph_cacl2": raw["pH_in_CaCl2"],
+            "oc_gkg": raw["OC"],
+            "n_gkg": raw["N"],
+            "p_mgkg": raw["P"],
+            "k_mgkg": raw["K"],
+            "caco3": raw["CaCO3"],
+            "clay_pct": raw["clay"],
+            "sand_pct": raw["sand"],
+            "silt_pct": raw["silt"],
+            "coarse_pct": raw["coarse"],
+            "cec_ph7": raw["CEC"],
         }
     )
 
@@ -267,8 +298,9 @@ def build_training_csv(out_path: Path | None = None) -> pd.DataFrame:
     DATA_DIR.mkdir(exist_ok=True)
     lucas18 = load_lucas_2018()
     lucas15 = _fill_lucas_2015_coords(load_lucas_2015(), lucas18)
+    lucas09 = load_lucas_2009()
     wosis = load_wosis()
-    combined = pd.concat([lucas18, lucas15, wosis], ignore_index=True, sort=False)
+    combined = pd.concat([lucas18, lucas15, lucas09, wosis], ignore_index=True, sort=False)
     final = clean(combined)
     path = out_path or TRAINING_CSV
     final.to_csv(path, index=False)

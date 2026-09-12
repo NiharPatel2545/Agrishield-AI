@@ -7,9 +7,12 @@ from agrishield.config import GEE_PROJECT_ID
 SENTINEL_BANDS = ["B2", "B3", "B4", "B8", "B11"]
 
 # OpenLandMap surface (0 cm) texture fraction layers — global, static, free.
+# NOTE: there is no SILT_IMG. OpenLandMap published a silt layer on Zenodo but
+# Google never mirrored it into the EE catalog -- ee.Image() on that path 404s.
+# Silt is derived instead: clay% + sand% + silt% ~= 100 (soil texture identity),
+# so silt_pct = 100 - clay_pct - sand_pct. Never re-add a SILT_IMG asset id here.
 CLAY_IMG = "OpenLandMap/SOL/SOL_CLAY-WFRACTION_USDA-3A1A1A_M/v02"
 SAND_IMG = "OpenLandMap/SOL/SOL_SAND-WFRACTION_USDA-3A1A1A_M/v02"
-SILT_IMG = "OpenLandMap/SOL/SOL_SILT-WFRACTION_USDA-3A1A1A_M/v02"
 ELEVATION_IMG = "USGS/SRTMGL1_003"
 
 
@@ -69,9 +72,11 @@ def static_soil_at_point(longitude: float, latitude: float) -> dict:
     point = ee.Geometry.Point([longitude, latitude])
     clay = ee.Image(CLAY_IMG).select("b0").rename("clay_pct")
     sand = ee.Image(SAND_IMG).select("b0").rename("sand_pct")
-    silt = ee.Image(SILT_IMG).select("b0").rename("silt_pct")
     elev = ee.Image(ELEVATION_IMG).select("elevation").rename("elevation_m")
-    stack = clay.addBands([sand, silt, elev])
+    stack = clay.addBands([sand, elev])
     sample = stack.sample(point, 250).first()
     info = sample.getInfo() if sample else None
-    return info.get("properties", {}) if info else {}
+    props = info.get("properties", {}) if info else {}
+    if "clay_pct" in props and "sand_pct" in props:
+        props["silt_pct"] = 100.0 - props["clay_pct"] - props["sand_pct"]
+    return props
