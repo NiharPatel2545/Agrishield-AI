@@ -131,6 +131,18 @@ def attach_static_soil(df: pd.DataFrame, batch_size: int = 400, pause_s: float =
     out_cols = ["clay_pct", "sand_pct", "elevation_m", "slope_deg"]
     work["_soil_pending"] = work["latitude"].notna() & work["longitude"].notna()
 
+    # clay_pct/sand_pct/elevation_m already exist in this CSV from LUCAS
+    # survey columns / WoSIS lab columns (WOSIS_CANONICAL) BEFORE this
+    # function ever runs. Null them out for every pending row first, so a
+    # genuine GEE failure leaves a real NaN instead of silently keeping the
+    # old lab value -- otherwise a failed GEE row looks "filled" here even
+    # though a live farmer would never get that lab value at inference
+    # time. slope_deg is new and never pre-existed, so it's unaffected.
+    pending = work["_soil_pending"]
+    for col in ("clay_pct", "sand_pct", "elevation_m"):
+        if col in work.columns:
+            work.loc[pending, col] = pd.NA
+
     clay = ee.Image(CLAY_IMG).select("b0").rename("clay_pct")
     sand = ee.Image(SAND_IMG).select("b0").rename("sand_pct")
     elev = ee.Image(ELEVATION_IMG).select("elevation").rename("elevation_m")
