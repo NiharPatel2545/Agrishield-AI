@@ -20,25 +20,20 @@ MODEL_PATH = MODELS_DIR / "soil_risk_rf.joblib"
 GEE_PROJECT_ID = os.getenv("GEE_PROJECT_ID", "valued-aquifer-507001-v2")
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
 
+# Every one of these must be obtainable from inference.live_features() for a
+# brand-new coordinate with NO lab test. This is the actual hard constraint the
+# model has to satisfy. Do not add a lab/survey-only column here.
 FEATURE_COLUMNS = [
-    "oc_gkg",
-    "n_gkg",
-    "p_mgkg",
-    "k_mgkg",
-    "ec",
-    "caco3",
-    "clay_pct",
-    "sand_pct",
-    "silt_pct",
-    "coarse_pct",
-    "elevation_m",
-    "bd_0_20",
-    "cec_ph7",
-    "totc_gkg",
-    "tmean_c",
-    "precip_mm",
+    "B2", "B3", "B4", "B8", "B11",   # Sentinel-2 bands, live
+    "ndvi",                            # derived from B8/B4, live
+    "elevation_m",                     # SRTM, live (NOT the LUCAS survey column)
+    "clay_pct", "sand_pct", "silt_pct",  # OpenLandMap static maps, live
+    "tmean_c", "precip_mm",            # WorldClim climatology, live
 ]
-TARGET_COLUMN = "acidic"
+# Lab-only columns (oc_gkg, n_gkg, p_mgkg, k_mgkg, ec, caco3, bd_0_20,
+# cec_ph7, totc_gkg) may only ever be a TARGET, never a feature — no live
+# API can ever produce them for a new farmer coordinate.
+TARGET_COLUMN = "acidic"  # derived from ph_h2o; swap to "oc_gkg" for a regression target
 
 EXAMPLE_SITE = {
     "name": "Clayton, Victoria",

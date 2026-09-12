@@ -1,0 +1,10 @@
+earthengine-api
+requests
+python-dotenv
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+plotly
+joblib
