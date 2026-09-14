@@ -4,7 +4,7 @@ from pathlib import Path
 
 import joblib
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
+import xgboost as xgb
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import classification_report
 from sklearn.model_selection import GroupShuffleSplit
@@ -12,22 +12,41 @@ from sklearn.pipeline import Pipeline
 
 from agrishield.config import FEATURE_COLUMNS, MODEL_PATH, MODELS_DIR, TARGET_COLUMN
 
+# Found by RandomizedSearchCV (30 candidates x 5-fold GroupKFold, scoring="f1"
+# on the acidic class, grouped by sample_id) -- see git history / project
+# notes for the search script if these ever need retuning. Result: CV f1 =
+# 0.721, and importantly max_depth landed low (7, out of a 3-8 search range)
+# -- shallow trees are what actually helped continent-holdout generalization,
+# not just in-distribution accuracy. Don't casually raise max_depth back up
+# without rerunning the continent holdout check below.
+_TUNED_XGB_PARAMS = dict(
+    n_estimators=407,
+    max_depth=7,
+    learning_rate=0.1966,
+    subsample=0.6241,
+    colsample_bytree=0.8448,
+    min_child_weight=9,
+)
 
-def _pipeline() -> Pipeline:
+
+def _pipeline(scale_pos_weight: float) -> Pipeline:
     return Pipeline(
         steps=[
             ("imputer", SimpleImputer(strategy="median")),
             (
                 "clf",
-                RandomForestClassifier(
-                    n_estimators=200,
+                xgb.XGBClassifier(
+                    **_TUNED_XGB_PARAMS,
+                    scale_pos_weight=scale_pos_weight,  # XGBoost has no
+                    # class_weight="balanced" -- this is the equivalent.
+                    # Computed per-call from the actual training split
+                    # (neg/pos), not hardcoded, so retraining on updated
+                    # data keeps this correctly calibrated to whatever the
+                    # class balance is at the time, same principle as
+                    # class_weight="balanced" for RandomForest.
                     random_state=0,
                     n_jobs=-1,
-                    class_weight="balanced",  # was unweighted -- if `acidic`
-                    # isn't ~50/50, an unweighted RF can look accurate while
-                    # just learning the majority class. class_weight fixes
-                    # the loss; you should still eyeball the printed balance
-                    # below rather than trust accuracy alone.
+                    eval_metric="logloss",
                 ),
             ),
         ]
@@ -65,10 +84,41 @@ def train(df: pd.DataFrame, target: str = TARGET_COLUMN, group_col: str = "sampl
     X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
     y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
-    model = _pipeline()
+    neg, pos = (y_train == 0).sum(), (y_train == 1).sum()
+    model = _pipeline(scale_pos_weight=neg / pos)
     model.fit(X_train, y_train)
     report = classification_report(y_test, model.predict(X_test), digits=3)
     return model, report
+
+
+def continent_holdout_check(df: pd.DataFrame, target: str = TARGET_COLUMN,
+                             min_test_rows: int = 100) -> None:
+    """Diagnostic, not a fix: train with one continent fully removed, test only on it.
+
+    Loops every continent with enough rows, not just one pair -- a single
+    biggest-vs-second-biggest comparison (as train_pipeline.py used to do)
+    hides how badly generalization varies by region. This is exactly the
+    check that showed cross-continent recall dropping to 0.25-0.40 versus
+    0.665 in-distribution on the RandomForest model; rerun this after any
+    retrain to confirm XGBoost's continent numbers before trusting them.
+    """
+    if "continent" not in df.columns:
+        print("no 'continent' column -- skipping holdout check")
+        return
+    cols = available_features(df)
+    data = df.dropna(subset=[target])
+    for holdout in data["continent"].dropna().unique():
+        tr = data[data["continent"] != holdout]
+        te = data[data["continent"] == holdout]
+        if len(te) < min_test_rows:
+            print(f"skipping {holdout!r}: only {len(te)} rows (< {min_test_rows})")
+            continue
+        neg, pos = (tr[target] == 0).sum(), (tr[target] == 1).sum()
+        pipe = _pipeline(scale_pos_weight=neg / pos)
+        pipe.fit(tr[cols], tr[target])
+        preds = pipe.predict(te[cols])
+        print(f"\n--- trained WITHOUT {holdout}, tested ON {holdout} (n={len(te)}) ---")
+        print(classification_report(te[target], preds, digits=3))
 
 
 def save_model(model: Pipeline, path: Path | None = None) -> Path:
