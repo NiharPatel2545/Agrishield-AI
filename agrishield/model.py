@@ -15,28 +15,31 @@ from agrishield.config import FEATURE_COLUMNS, MODEL_PATH, MODELS_DIR, TARGET_CO
 # Found by RandomizedSearchCV (30 candidates x 5-fold GroupKFold, scoring="f1"
 # on the acidic class, grouped by sample_id) -- see git history / project
 # notes for the search script if these ever need retuning. Result: CV f1 =
-# 0.721, and importantly max_depth landed low (7, out of a 3-8 search range)
+# 0.721, and importantly max_depth landed low (6, out of a 3-8 search range)
 # -- shallow trees are what actually helped continent-holdout generalization,
 # not just in-distribution accuracy. Don't casually raise max_depth back up
 # without rerunning the continent holdout check below.
 _TUNED_XGB_PARAMS = dict(
-    n_estimators=407,
-    max_depth=7,
-    learning_rate=0.1966,
-    subsample=0.6241,
-    colsample_bytree=0.8448,
-    min_child_weight=9,
+    n_estimators=410,
+    max_depth=6,
+    learning_rate=0.2025,
+    subsample=0.6465,
+    colsample_bytree=0.9584,
+    min_child_weight=1,
 )
 
 
-def _pipeline(scale_pos_weight: float) -> Pipeline:
+def _pipeline(scale_pos_weight: float, params: dict | None = None) -> Pipeline:
+    """params overrides _TUNED_XGB_PARAMS -- pass a candidate dict to test
+    an alternative without touching the actual default used by train()."""
+    xgb_params = params if params is not None else _TUNED_XGB_PARAMS
     return Pipeline(
         steps=[
             ("imputer", SimpleImputer(strategy="median")),
             (
                 "clf",
                 xgb.XGBClassifier(
-                    **_TUNED_XGB_PARAMS,
+                    **xgb_params,
                     scale_pos_weight=scale_pos_weight,  # XGBoost has no
                     # class_weight="balanced" -- this is the equivalent.
                     # Computed per-call from the actual training split
@@ -57,7 +60,8 @@ def available_features(df: pd.DataFrame) -> list[str]:
     return [c for c in FEATURE_COLUMNS if c in df.columns]
 
 
-def train(df: pd.DataFrame, target: str = TARGET_COLUMN, group_col: str = "sample_id") -> tuple[Pipeline, str]:
+def train(df: pd.DataFrame, target: str = TARGET_COLUMN, group_col: str = "sample_id",
+          params: dict | None = None) -> tuple[Pipeline, str]:
     """Train on chemistry/texture/climate. pH is the label source, so it is not a feature.
 
     Split by `group_col` (sample_id), not a plain random split. LUCAS
@@ -66,6 +70,10 @@ def train(df: pd.DataFrame, target: str = TARGET_COLUMN, group_col: str = "sampl
     inflates the reported accuracy (the model has effectively already
     "seen" that test point). GroupShuffleSplit keeps every row for a given
     sample_id entirely on one side of the split.
+
+    `params` overrides the tuned defaults -- pass a candidate dict to
+    evaluate an alternative hyperparameter set without changing what
+    save_model() would freeze if you called train(df) with no override.
     """
     cols = available_features(df)
     work = df.dropna(subset=[target]).copy()
@@ -85,14 +93,14 @@ def train(df: pd.DataFrame, target: str = TARGET_COLUMN, group_col: str = "sampl
     y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
     neg, pos = (y_train == 0).sum(), (y_train == 1).sum()
-    model = _pipeline(scale_pos_weight=neg / pos)
+    model = _pipeline(scale_pos_weight=neg / pos, params=params)
     model.fit(X_train, y_train)
     report = classification_report(y_test, model.predict(X_test), digits=3)
     return model, report
 
 
 def continent_holdout_check(df: pd.DataFrame, target: str = TARGET_COLUMN,
-                             min_test_rows: int = 100) -> None:
+                             min_test_rows: int = 100, params: dict | None = None) -> None:
     """Diagnostic, not a fix: train with one continent fully removed, test only on it.
 
     Loops every continent with enough rows, not just one pair -- a single
@@ -101,6 +109,10 @@ def continent_holdout_check(df: pd.DataFrame, target: str = TARGET_COLUMN,
     check that showed cross-continent recall dropping to 0.25-0.40 versus
     0.665 in-distribution on the RandomForest model; rerun this after any
     retrain to confirm XGBoost's continent numbers before trusting them.
+
+    `params` overrides the tuned defaults -- same purpose as in train():
+    compare a candidate hyperparameter set's REGIONAL generalization, not
+    just its in-distribution score, before ever adopting it.
     """
     if "continent" not in df.columns:
         print("no 'continent' column -- skipping holdout check")
@@ -114,7 +126,7 @@ def continent_holdout_check(df: pd.DataFrame, target: str = TARGET_COLUMN,
             print(f"skipping {holdout!r}: only {len(te)} rows (< {min_test_rows})")
             continue
         neg, pos = (tr[target] == 0).sum(), (tr[target] == 1).sum()
-        pipe = _pipeline(scale_pos_weight=neg / pos)
+        pipe = _pipeline(scale_pos_weight=neg / pos, params=params)
         pipe.fit(tr[cols], tr[target])
         preds = pipe.predict(te[cols])
         print(f"\n--- trained WITHOUT {holdout}, tested ON {holdout} (n={len(te)}) ---")

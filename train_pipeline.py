@@ -18,55 +18,7 @@ import pandas as pd
 from agrishield.config import TRAINING_CSV, FEATURE_COLUMNS
 from agrishield.dataset import build_training_csv, drop_gee_dead_rows
 from agrishield.climate import enrich_training_csv
-from agrishield.model import train, save_model, available_features
-
-
-def continent_holdout_check(df: pd.DataFrame, target: str = "acidic") -> None:
-    """Diagnostic, not a fix: trains on one continent, tests on another.
-
-    climate/texture columns can act as a location fingerprint even with
-    lat/lon dropped (see problem #2) -- if accuracy collapses when tested
-    on a continent the model never trained on, that's a strong sign the
-    model is leaning on regional signature rather than universal soil
-    physics. This does not change training; it just tells you whether to
-    worry.
-    """
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.impute import SimpleImputer
-    from sklearn.metrics import classification_report
-    from sklearn.pipeline import Pipeline
-
-    if "continent" not in df.columns:
-        print("no 'continent' column -- skipping holdout check")
-        return
-
-    work = df.dropna(subset=[target]).copy()
-    counts = work["continent"].value_counts()
-    if len(counts) < 2:
-        print("only one continent present -- skipping holdout check")
-        return
-
-    biggest, second = counts.index[0], counts.index[1]
-    cols = available_features(work)
-
-    train_df = work[work["continent"] == biggest]
-    test_df = work[work["continent"] == second]
-    if train_df.empty or test_df.empty:
-        return
-
-    model = Pipeline(
-        steps=[
-            ("imputer", SimpleImputer(strategy="median")),
-            ("clf", RandomForestClassifier(n_estimators=200, random_state=0, n_jobs=-1, class_weight="balanced")),
-        ]
-    )
-    model.fit(train_df[cols], train_df[target])
-    preds = model.predict(test_df[cols])
-    print(f"\n--- continent holdout: train={biggest} ({len(train_df)} rows) "
-          f"-> test={second} ({len(test_df)} rows) ---")
-    print(classification_report(test_df[target], preds, digits=3))
-    print("(compare this report's numbers to the main grouped-split report above;"
-          " a big drop here means the model is leaning on regional signature)")
+from agrishield.model import train, save_model, available_features, continent_holdout_check
 
 
 def main() -> None:

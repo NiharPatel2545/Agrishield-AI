@@ -16,7 +16,7 @@ WOSIS_DIR = PROJECT_ROOT / "WoSIS"
 DATA_DIR = PROJECT_ROOT / "data"
 MODELS_DIR = PROJECT_ROOT / "models"
 TRAINING_CSV = DATA_DIR / "agrishield_training.csv"
-MODEL_PATH = MODELS_DIR / "soil_risk_rf.joblib"
+MODEL_PATH = MODELS_DIR / "soil_risk_model.joblib"
 
 GEE_PROJECT_ID = os.getenv("GEE_PROJECT_ID", "valued-aquifer-507001-v2")
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
