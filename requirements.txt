@@ -9,3 +9,5 @@ matplotlib
 seaborn
 plotly
 joblib
+fastapi
+uvicorn

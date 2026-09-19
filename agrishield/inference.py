@@ -4,6 +4,48 @@ from datetime import date, timedelta
 
 from agrishield.config import EXAMPLE_SITE, FEATURE_COLUMNS
 from agrishield import gee, weather
+from agrishield.geography import approximate_continent
+
+# Straight from continent_holdout_check() on the final tuned XGBoost model
+# (see /areas/agrishield notes) -- acidic-class recall when that continent
+# was held ENTIRELY out of training. This is an honest "how much did the
+# model actually validate against something like your region" signal, not
+# a made-up confidence score. Update this dict if you rerun the holdout
+# check after any retrain -- it will go stale otherwise.
+_CONTINENT_HOLDOUT_RECALL = {
+    "South America": 0.789,
+    "Oceania": 0.673,
+    "Europe": 0.652,
+    "Asia": 0.569,
+    "Africa": 0.564,
+    "Northern America": 0.497,
+}
+
+
+def _confidence_for(continent: str | None) -> dict:
+    if continent is None or continent not in _CONTINENT_HOLDOUT_RECALL:
+        return {
+            "continent": continent,
+            "tier": "unknown",
+            "note": "Coordinates fall outside the regions this model has been validated against.",
+        }
+    recall = _CONTINENT_HOLDOUT_RECALL[continent]
+    if recall >= 0.65:
+        tier = "higher"
+    elif recall >= 0.55:
+        tier = "moderate"
+    else:
+        tier = "lower"
+    return {
+        "continent": continent,
+        "tier": tier,
+        "held_out_recall": recall,
+        "note": (
+            f"When {continent} was fully excluded from training and tested cold, "
+            f"the model still caught {recall:.0%} of real acidic soil there. "
+            "Treat this as a regional reliability signal, not the model's own confidence."
+        ),
+    }
 
 
 def live_model_inputs(latitude: float, longitude: float) -> dict:
@@ -62,15 +104,17 @@ def live_model_inputs(latitude: float, longitude: float) -> dict:
 
 
 def live_features(latitude: float, longitude: float) -> dict:
-    """Model inputs PLUS current weather -- for the human-facing report,
-    not for the model itself. current_weather is deliberately excluded
-    from FEATURE_COLUMNS: it's today's snapshot, not something present
-    (in this form) for any 2015/2018 training row.
+    """Model inputs PLUS current weather AND a regional confidence signal --
+    for the human-facing report, not for the model itself. current_weather
+    is deliberately excluded from FEATURE_COLUMNS: it's today's snapshot,
+    not something present (in this form) for any 2015/2018 training row.
     """
+    continent = approximate_continent(latitude, longitude)
     out = {
         "latitude": latitude,
         "longitude": longitude,
         "model_inputs": live_model_inputs(latitude, longitude),
+        "confidence": _confidence_for(continent),
     }
     try:
         out["weather_now"] = weather.current_weather(latitude, longitude)
