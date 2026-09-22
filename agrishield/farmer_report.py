@@ -9,10 +9,17 @@ from agrishield.config import PROJECT_ROOT
 CROP_CSV_PATH = PROJECT_ROOT / "data" / "crop_requirements.csv"
 
 
-def _load_crop_table(path: Path = CROP_CSV_PATH) -> pd.DataFrame:
+def _load_crop_table(path: Path = CROP_CSV_PATH) -> pd.DataFrame | None:
     """Loaded fresh each call -- this is a small reference table (a few KB),
     not the training data, so re-reading it costs nothing and means editing
-    the CSV takes effect immediately with no restart needed."""
+    the CSV takes effect immediately with no restart needed.
+
+    Returns None (not an exception) if the file doesn't exist yet. Without
+    this, every /scan call with no crop given still hits suggest_crops()
+    below, which unconditionally read this file -- a 100% crash rate on
+    the live API until a real crop_requirements.csv is added."""
+    if not path.exists():
+        return None
     return pd.read_csv(path)
 
 
@@ -47,8 +54,11 @@ def farmer_report(lat: float, lon: float, model, live_inputs: dict, prediction: 
     crop_note = None
     if crop:
         crops = _load_crop_table()
-        match = crops[crops["crop"].str.lower() == crop.lower()]
-        if not match.empty:
+        if crops is None:
+            crop_note = f"No crop_requirements.csv yet -- can't check {crop}'s pH tolerance."
+        else:
+            match = crops[crops["crop"].str.lower() == crop.lower()]
+        if crops is not None and not match.empty:
             low, high = float(match.iloc[0]["ph_min"]), float(match.iloc[0]["ph_max"])
             if predicted_acidic and high <= 5.8:
                 verdict = "suitable"
@@ -81,10 +91,15 @@ def farmer_report(lat: float, lon: float, model, live_inputs: dict, prediction: 
 
 
 def suggest_crops(prediction: dict, top_n: int = 5) -> list[str]:
-    """Reverse direction: no crop given -- suggest ones that suit THIS soil."""
+    """Reverse direction: no crop given -- suggest ones that suit THIS soil.
+    Returns [] (not an exception) if crop_requirements.csv doesn't exist yet --
+    this is what api.py's /scan calls on every crop-less request, so a hard
+    crash here means every such request 500s."""
+    crops = _load_crop_table()
+    if crops is None:
+        return []
     acidic_prob = prediction["probability"].get(1, 0.0)
     is_acidic = acidic_prob >= 0.5
-    crops = _load_crop_table()
     if is_acidic:
         matches = crops[crops["ph_max"] <= 5.8]
     else:
