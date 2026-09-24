@@ -13,6 +13,7 @@ import time
 from collections import defaultdict
 
 from fastapi import FastAPI, HTTPException, Header, Query
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from agrishield.config import MODELS_DIR
@@ -22,6 +23,17 @@ from agrishield.farmer_report import farmer_report, suggest_crops
 from agrishield import weather as weather_module
 
 app = FastAPI(title="Agrishield API", version="0.1.0")
+
+# Browser calls from your deployed website (a different origin than this
+# API) are blocked by default -- CORS has to explicitly allow it. Restrict
+# allow_origins to your actual deployed frontend URL(s) once you have them;
+# "*" is fine for local dev but permissive.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # TODO: replace with your real deployed frontend URL(s)
+    allow_methods=["GET"],
+    allow_headers=["X-API-Key"],
+)
 
 # Loaded ONCE at startup, not per-request -- loading a joblib from disk on
 # every API call would be needlessly slow and is the classic mistake here.

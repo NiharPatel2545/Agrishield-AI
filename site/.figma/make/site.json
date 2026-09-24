@@ -1,0 +1,10 @@
+{
+  "description": "This AI-driven platform predicts soil health in real time, empowering farmers and enterprises with actionable insights to optimize land restoration and sustainability.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -62,14 +62,16 @@ def farmer_report(lat: float, lon: float, model, live_inputs: dict, prediction: 
             crop_note = f"No crop_requirements.csv yet -- can't check {crop}'s pH tolerance."
         else:
             match = crops[crops["crop"].str.lower() == crop.lower()]
-        if crops is not None and not match.empty:
-            low, high = float(match.iloc[0]["ph_min"]), float(match.iloc[0]["ph_max"])
-            if predicted_acidic and high <= 5.8:
-                verdict = "suitable"
-                headline = f"Acidic soil -- but that suits {crop}"
-                action = f"{crop.title()} tolerates pH {low}-{high}; no lime treatment needed."
-                color = "#22C55E"
-            crop_note = f"{crop.title()} typically prefers pH {low}-{high}."
+            if match.empty:
+                crop_note = f"'{crop}' isn't in our crop database -- couldn't check its pH tolerance."
+            else:
+                low, high = float(match.iloc[0]["ph_min"]), float(match.iloc[0]["ph_max"])
+                if predicted_acidic and high <= 5.8:
+                    verdict = "suitable"
+                    headline = f"Acidic soil -- but that suits {crop}"
+                    action = f"{crop.title()} tolerates pH {low}-{high}; no lime treatment needed."
+                    color = "#22C55E"
+                crop_note = f"{crop.title()} typically prefers pH {low}-{high}."
 
     # Real quartiles from the actual training data (see /areas/agrishield
     # notes): 25th pct ~10.3, 75th pct ~35.7 g/kg. Not round guesses.
