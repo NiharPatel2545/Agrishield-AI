@@ -1,6 +1,7 @@
 """FastAPI service: the one thing everything else (website, crop suggestions,
-confidence indicator) depends on existing. Run locally with:
-    uvicorn api:app --reload
+confidence indicator) depends on existing. Run locally, FROM THE PROJECT ROOT
+(the folder above agrishield/), with:
+    uvicorn agrishield.api:app --reload
 Then hit http://127.0.0.1:8000/docs for an interactive test page for free
 (FastAPI auto-generates this -- no extra work needed).
 """
@@ -14,7 +15,8 @@ from collections import defaultdict
 from fastapi import FastAPI, HTTPException, Header, Query
 from pydantic import BaseModel
 
-from agrishield.model import load_model, predict_proba
+from agrishield.config import MODELS_DIR
+from agrishield.model import load_model, predict_proba, predict_oc
 from agrishield.inference import live_features, live_model_inputs
 from agrishield.farmer_report import farmer_report, suggest_crops
 from agrishield import weather as weather_module
@@ -24,6 +26,13 @@ app = FastAPI(title="Agrishield API", version="0.1.0")
 # Loaded ONCE at startup, not per-request -- loading a joblib from disk on
 # every API call would be needlessly slow and is the classic mistake here.
 _model = load_model()
+
+# Second model, SEPARATE FILE from the acidic classifier -- save_model() in
+# the notebook must be called with path=MODELS_DIR/"oc_model.joblib" for the
+# regression model, or it will silently overwrite the classifier's joblib.
+# If that file doesn't exist yet, oc prediction is just skipped (no crash).
+_OC_MODEL_PATH = MODELS_DIR / "oc_model.joblib"
+_oc_model = load_model(path=_OC_MODEL_PATH) if _OC_MODEL_PATH.exists() else None
 
 
 # ---- basic API-key + rate limiting -------------------------------------
@@ -61,6 +70,8 @@ class ScanResponse(BaseModel):
     confidence_pct: float
     recommended_action: str
     crop_note: str | None
+    oc_note: str | None
+    predicted_oc_gkg: float | None
     color: str
     context: dict
     caveats: list[str]
@@ -100,10 +111,12 @@ def scan(
     prediction = predict_proba(_model, full["model_inputs"])
     weather_now = full.get("weather_now")
 
+    oc_value = predict_oc(_oc_model, full["model_inputs"]) if _oc_model is not None else None
+
     report = farmer_report(
         lat=lat, lon=lon, model=_model,
         live_inputs=full["model_inputs"], prediction=prediction,
-        weather=weather_now, crop=crop,
+        weather=weather_now, crop=crop, predicted_oc=oc_value,
     )
     report["regional_confidence"] = full["confidence"]
 

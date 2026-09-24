@@ -6,7 +6,7 @@ import joblib
 import pandas as pd
 import xgboost as xgb
 from sklearn.impute import SimpleImputer
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, mean_absolute_error, r2_score
 from sklearn.model_selection import GroupShuffleSplit
 from sklearn.pipeline import Pipeline
 
@@ -62,7 +62,7 @@ def available_features(df: pd.DataFrame) -> list[str]:
 
 def train(df: pd.DataFrame, target: str = TARGET_COLUMN, group_col: str = "sample_id",
           params: dict | None = None) -> tuple[Pipeline, str]:
-    """Train on chemistry/texture/climate. pH is the label source, so it is not a feature.
+    """Train the acidic/not classifier. pH is the label source, so it is not a feature.
 
     Split by `group_col` (sample_id), not a plain random split. LUCAS
     resurveys the same physical points across 2009/2015/2018 -- a random
@@ -133,6 +133,69 @@ def continent_holdout_check(df: pd.DataFrame, target: str = TARGET_COLUMN,
         print(classification_report(te[target], preds, digits=3))
 
 
+def train_regression(df: pd.DataFrame, target: str = "oc_gkg",
+                      group_col: str = "sample_id") -> tuple[Pipeline, dict]:
+    """Second model, parallel to train() -- organic carbon, not acidic/not.
+    Same leakage-safe split, same feature set. Metrics are MAE/R^2, not
+    precision/recall -- recall doesn't mean anything for a continuous target.
+    """
+    cols = available_features(df)
+    work = df.dropna(subset=[target]).copy()
+    if group_col not in work.columns:
+        raise ValueError(f"'{group_col}' column required for a leakage-safe split")
+
+    X = work[cols]
+    y = work[target]
+    groups = work[group_col]
+
+    splitter = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=0)
+    train_idx, test_idx = next(splitter.split(X, y, groups=groups))
+
+    pipe = Pipeline(
+        steps=[
+            ("imputer", SimpleImputer(strategy="median")),
+            ("reg", xgb.XGBRegressor(n_estimators=300, max_depth=6, random_state=0, n_jobs=-1)),
+        ]
+    )
+    pipe.fit(X.iloc[train_idx], y.iloc[train_idx])
+    preds = pipe.predict(X.iloc[test_idx])
+    y_test = y.iloc[test_idx]
+
+    metrics = {"mae": mean_absolute_error(y_test, preds), "r2": r2_score(y_test, preds)}
+    return pipe, metrics
+
+
+def continent_holdout_regression(df: pd.DataFrame, target: str = "oc_gkg",
+                                  min_test_rows: int = 100) -> None:
+    """Same discipline as continent_holdout_check(), for the regression target.
+    Don't trust train_regression()'s MAE/R^2 for any region until this has
+    been run and checked -- a regression model can have its own regional
+    generalization gap, same as the classifier did.
+    """
+    if "continent" not in df.columns:
+        print("no 'continent' column -- skipping holdout check")
+        return
+    cols = available_features(df)
+    data = df.dropna(subset=[target])
+    for holdout in data["continent"].dropna().unique():
+        tr = data[data["continent"] != holdout]
+        te = data[data["continent"] == holdout]
+        if len(te) < min_test_rows:
+            print(f"skipping {holdout!r}: only {len(te)} rows (< {min_test_rows})")
+            continue
+        pipe = Pipeline(
+            steps=[
+                ("imputer", SimpleImputer(strategy="median")),
+                ("reg", xgb.XGBRegressor(n_estimators=300, max_depth=6, random_state=0, n_jobs=-1)),
+            ]
+        )
+        pipe.fit(tr[cols], tr[target])
+        preds = pipe.predict(te[cols])
+        mae = mean_absolute_error(te[target], preds)
+        r2 = r2_score(te[target], preds)
+        print(f"{holdout}: MAE={mae:.2f}, R2={r2:.3f} (n={len(te)})")
+
+
 def save_model(model: Pipeline, path: Path | None = None) -> Path:
     MODELS_DIR.mkdir(exist_ok=True)
     out = path or MODEL_PATH
@@ -154,3 +217,10 @@ def predict_proba(model: Pipeline, features: dict) -> dict:
         "predicted": predicted,
         "probability": {int(c): float(p) for c, p in zip(classes, proba)},
     }
+
+
+def predict_oc(reg_model: Pipeline, features: dict) -> float:
+    """Regression has no predict_proba -- just a single number out."""
+    cols = list(getattr(reg_model, "feature_names_in_", FEATURE_COLUMNS))
+    frame = pd.DataFrame([{col: features.get(col) for col in cols}])
+    return float(reg_model.predict(frame)[0])
