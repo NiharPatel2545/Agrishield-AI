@@ -734,7 +734,7 @@ function SoilScanner() {
                 </div>
               ))}
             </div>
-            <button onClick={run} disabled={step !== 'idle' && !isResult}
+            <button onClick={() => run()} disabled={step !== 'idle' && !isResult}
               className="w-full bg-green-500 hover:bg-green-400 disabled:opacity-60 text-black font-semibold py-3 rounded-lg transition-colors glow-green mb-5"
               style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13 }}>
               {step === 'idle' ? '⟶  Calculate' : isResult ? '⟶  Scan Again' : '⟶  Scanning…'}
