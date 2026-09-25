@@ -353,7 +353,7 @@ function Hero() {
           <div className="flex gap-10 mt-14">
             {[
               { v: '2.3B', l: 'Hectares Monitored' },
-              { v: '96.4%', l: 'Model Accuracy · Illustrative' },
+              { v: '81.1%', l: 'Model Accuracy' },
               { v: '143', l: 'Countries' },
             ].map(s => (
               <div key={s.l}>
@@ -396,7 +396,7 @@ function Mission() {
             33% of global soils are already degraded. Without intervention, we face a silent crisis threatening food security for 9 billion people by 2050. Existing monitoring is too slow, too expensive, and too fragmented to act at the speed the planet needs.
           </p>
           <p className="text-slate-400 leading-relaxed font-light">
-            AgriShield changes that. By fusing satellite spectral data, climate signals and cutting-edge ML, we deliver actionable soil intelligence in minutes — empowering every actor in the agricultural ecosystem to make decisions rooted in real science.
+            AgriShield changes that. By fusing satellite spectral data, climate signals and cutting-edge ML, we deliver actionable soil intelligence in minutes empowering every actor in the agricultural ecosystem to make decisions rooted in real science.
           </p>
         </div>
         <div className={`fade-up delay-3 ${vis ? 'visible' : ''} grid grid-cols-2 gap-4`}>
@@ -404,7 +404,7 @@ function Mission() {
             { num: '33%', label: 'Global soils degraded', sub: 'FAO 2024 assessment', cls: 'text-red-400' },
             { num: '9B', label: 'People at risk by 2050', sub: 'Food security impact', cls: 'text-amber-400' },
             { num: '$8.1T', label: 'Economic value at stake', sub: 'Annual agricultural GDP', cls: 'text-amber-300' },
-            { num: '23min', label: 'Average scan time', sub: 'Satellite to insight', cls: 'text-green-400' },
+            { num: 'Seconds', label: 'Live scan time', sub: 'One coordinate, one live query', cls: 'text-green-400' },
           ].map(c => (
             <div key={c.label} className="glass rounded-xl p-5 border border-white/5 hover:border-green-500/20 transition-colors">
               <div style={{ fontFamily: "'Barlow Condensed',sans-serif" }} className={`text-4xl font-bold ${c.cls} mb-1`}>{c.num}</div>
@@ -432,10 +432,10 @@ function Pipeline() {
   }, [vis])
 
   const nodes = [
-    { label: 'Data Repos', items: ['WoSIS Soil DB', 'LUCAS Survey', 'CSIRO SoilData'], color: '#38bdf8', bg: 'rgba(56,189,248,0.08)', border: 'rgba(56,189,248,0.22)' },
+    { label: 'Data Repos', items: ['WoSIS Soil DB', 'LUCAS Survey'], color: '#38bdf8', bg: 'rgba(56,189,248,0.08)', border: 'rgba(56,189,248,0.22)' },
     { label: 'Satellite', items: ['Google Earth Engine', 'Sentinel-2 MSI', 'Copernicus Hub'], color: '#22c55e', bg: 'rgba(34,197,94,0.08)', border: 'rgba(34,197,94,0.22)' },
-    { label: 'Climate', items: ['Open-Meteo API', 'ERA5 Reanalysis', 'MODIS Land'], color: '#a78bfa', bg: 'rgba(167,139,250,0.08)', border: 'rgba(167,139,250,0.22)' },
-    { label: 'ML Model', items: ['XGBoost Ensemble', 'SHAP Explainer', 'Cross-validation'], color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.22)' },
+    { label: 'Climate', items: ['WorldClim Bioclim', 'OpenLandMap Texture', 'Open-Meteo (live)'], color: '#a78bfa', bg: 'rgba(167,139,250,0.08)', border: 'rgba(167,139,250,0.22)' },
+    { label: 'ML Model', items: ['XGBoost Ensemble', 'Feature Attribution', 'Grouped Cross-validation'], color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.22)' },
     { label: 'Soil Intelligence', items: ['Health Score', 'Degradation Map', 'Action Plan'], color: '#4ade80', bg: 'rgba(74,222,128,0.1)', border: 'rgba(74,222,128,0.35)' },
   ]
 
@@ -446,7 +446,7 @@ function Pipeline() {
           <div style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-green-400 tracking-widest mb-4">// 02 HOW IT WORKS</div>
           <h2 style={{ fontFamily: "'Barlow Condensed',sans-serif" }} className="text-[clamp(40px,6vw,72px)] font-bold text-white">INTELLIGENCE PIPELINE</h2>
           <p className="text-slate-400 mt-4 max-w-xl mx-auto font-light">
-            From raw satellite telemetry to precision soil insights in under 30 minutes.
+            From raw satellite telemetry to precision soil insights in under a minute.
           </p>
         </div>
         <div className="flex flex-col lg:flex-row items-stretch gap-0">
@@ -498,13 +498,13 @@ function Pipeline() {
 // ─── Technology ───────────────────────────────────────────────────────────────
 
 const featureData = [
-  { band: 'B8 NIR', val: 0.31 },
-  { band: 'B11 SWIR', val: 0.24 },
-  { band: 'Moisture', val: 0.18 },
-  { band: 'B4 Red', val: 0.11 },
-  { band: 'Temp °C', val: 0.08 },
-  { band: 'B3 Green', val: 0.05 },
-  { band: 'B2 Blue', val: 0.03 },
+  { band: 'Clay %', val: 0.158 },
+  { band: 'Rainfall', val: 0.127 },
+  { band: 'Temp °C', val: 0.079 },
+  { band: 'B12 SWIR2', val: 0.072 },
+  { band: 'B3 Green', val: 0.069 },
+  { band: 'Precip. Var.', val: 0.058 },
+  { band: 'Temp. Var.', val: 0.052 },
 ]
 
 function Technology() {
@@ -517,8 +517,7 @@ function Technology() {
     { id: 'B4', name: 'Red', nm: '665nm', desc: 'Chlorophyll absorption, NDVI numerator', color: '#f87171' },
     { id: 'B8', name: 'NIR', nm: '842nm', desc: 'Biomass, structure, soil contrast', color: '#c084fc' },
     { id: 'B11', name: 'SWIR-1', nm: '1610nm', desc: 'Moisture stress, clay mineral detection', color: '#fb923c' },
-    { id: 'SM', name: 'Soil Moisture', nm: 'ERA5', desc: 'Volumetric water 0–30cm depth', color: '#38bdf8' },
-    { id: 'T°', name: 'Temperature', nm: 'MODIS', desc: 'Land surface thermal, soil respiration', color: '#fbbf24' },
+    { id: 'T°', name: 'Temperature', nm: 'WorldClim', desc: 'Long-term climatology, not live weather', color: '#fbbf24' },
   ]
 
   return (
@@ -528,7 +527,7 @@ function Technology() {
           <div style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-green-400 tracking-widest mb-4">// 03 TECHNOLOGY</div>
           <h2 style={{ fontFamily: "'Barlow Condensed',sans-serif" }} className="text-[clamp(40px,6vw,72px)] font-bold text-white mb-4">SPECTRAL INTELLIGENCE</h2>
           <p className="text-slate-400 max-w-2xl font-light">
-            Seven live data channels fused through a gradient-boosted ensemble model trained on 1.4M soil samples across 89 soil classification types.
+            Nine live Sentinel-2 bands and NDVI, fused with climate and soil-texture signals through a tuned gradient-boosted ensemble, trained on 250,578 harmonised records from the LUCAS (EU) and WoSIS (global) soil surveys.
           </p>
         </div>
 
@@ -557,7 +556,7 @@ function Technology() {
 
           <div className={`fade-up delay-4 ${vis ? 'visible' : ''} glass rounded-2xl p-6 border border-white/5`}>
             <div style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-green-400 tracking-widest mb-1">MODEL EXPLAINABILITY</div>
-            <h3 style={{ fontFamily: "'Barlow Condensed',sans-serif" }} className="text-2xl font-semibold text-white mb-5">Feature Importance (SHAP)</h3>
+            <h3 style={{ fontFamily: "'Barlow Condensed',sans-serif" }} className="text-2xl font-semibold text-white mb-5">Feature Importance (XGBoost)</h3>
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={featureData} layout="vertical" margin={{ left: 0, right: 24 }}>
                 <CartesianGrid horizontal={false} stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3"/>
@@ -578,9 +577,9 @@ function Technology() {
 
             <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-white/5">
               {[
-                { l: 'MAE', v: '0.42 t/ha', d: 'Mean Abs. Error' },
-                { l: 'RMSE', v: '0.61 t/ha', d: 'Root Mean Sq.' },
-                { l: 'R²', v: '0.887', d: 'Explained Var.' },
+                { l: 'Accuracy', v: '81.1%', d: 'Held-out test set' },
+                { l: 'Recall', v: '79.3%', d: 'Acidic class' },
+                { l: 'F1', v: '0.718', d: 'Acidic class' },
               ].map(m => (
                 <div key={m.l} className="text-center">
                   <div style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-slate-500 mb-1">{m.d}</div>
@@ -1042,9 +1041,9 @@ function Enterprise() {
                 {tab === 'model' && (
                   <div className="grid grid-cols-3 gap-4 py-4">
                     {[
-                      { l: 'MAE', v: '0.42', u: 't C/ha', d: 'Mean Absolute Error — model accuracy in predicting soil carbon stock.' },
-                      { l: 'RMSE', v: '0.61', u: 't C/ha', d: 'Root Mean Square Error — penalises large prediction deviations.' },
-                      { l: 'R²', v: '0.887', u: '', d: 'Coefficient of determination — 88.7% of variance explained.' },
+                      { l: 'Accuracy', v: '81.1', u: '%', d: 'Held-out test-set accuracy for the soil-acidity classifier.' },
+                      { l: 'Recall', v: '79.3', u: '%', d: 'Acidic-class recall — how many truly acidic samples were caught.' },
+                      { l: 'F1', v: '0.718', u: '', d: 'Acidic-class F1 score, balancing precision and recall.' },
                     ].map(m => (
                       <div key={m.l} className="bg-white/3 rounded-xl p-4 border border-white/5">
                         <div style={{ fontFamily: "'Barlow Condensed',sans-serif" }} className="text-4xl font-bold text-green-400 mb-1">{m.v}<span className="text-xl text-slate-500 font-light"> {m.u}</span></div>
@@ -1158,12 +1157,11 @@ function DataSources() {
   const sources = [
     { n: 'WoSIS', full: 'World Soil Information Service', org: 'ISRIC', type: 'Soil Reference Data', c: '#22c55e' },
     { n: 'LUCAS', full: 'Land Use/Cover Area Survey', org: 'Eurostat', type: 'Ground Truth', c: '#38bdf8' },
-    { n: 'CSIRO', full: 'Soil and Landscape Grid', org: 'Australia', type: 'Soil Properties', c: '#a78bfa' },
     { n: 'GEE', full: 'Google Earth Engine', org: 'Google', type: 'Satellite Processing', c: '#34d399' },
     { n: 'S-2', full: 'Sentinel-2 MSI', org: 'ESA Copernicus', type: '10m Imagery', c: '#60a5fa' },
-    { n: 'ERA5', full: 'Climate Reanalysis', org: 'ECMWF', type: 'Climate Data', c: '#fbbf24' },
-    { n: 'MODIS', full: 'Land Surface Temp', org: 'NASA', type: 'Thermal Data', c: '#f87171' },
-    { n: 'O-M', full: 'Open-Meteo API', org: 'Open-Meteo.com', type: 'Weather Data', c: '#c084fc' },
+    { n: 'WC', full: 'WorldClim Bioclim Variables', org: 'WorldClim.org', type: 'Climate Data', c: '#fbbf24' },
+    { n: 'OLM', full: 'Texture & Elevation Maps', org: 'OpenLandMap / SRTM', type: 'Soil Texture Data', c: '#f87171' },
+    { n: 'O-M', full: 'Open-Meteo API', org: 'Open-Meteo.com', type: 'Live Weather Data', c: '#c084fc' },
   ]
   return (
     <section id="data-sources" className="py-24 px-6" ref={ref}>
@@ -1291,20 +1289,28 @@ function Footer() {
             <p style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-slate-500 leading-relaxed mb-4">AI-powered soil intelligence from satellites and machine learning. Protecting Earth's most critical resource.</p>
           </div>
           {[
-            { t: 'PLATFORM', ls: ['Soil Scanner', 'Enterprise Dashboard', 'API Documentation', 'Model Cards', 'Data Sources'] },
-            { t: 'COMPANY', ls: ['About', 'Research', 'Careers', 'Press', 'Contact'] },
-            { t: 'LEGAL', ls: ['Privacy Policy', 'Terms of Service', 'Data Processing'] },
+            {
+              t: 'PLATFORM',
+              real: [{ l: 'Soil Scanner', href: '#soil-scan' }, { l: 'Data Sources', href: '#data-sources' }],
+              soon: ['Enterprise Dashboard', 'API Documentation', 'Model Cards'],
+            },
+            { t: 'COMPANY', real: [], soon: ['About', 'Research', 'Careers', 'Press', 'Contact'] },
+            { t: 'LEGAL', real: [], soon: ['Privacy Policy', 'Terms of Service', 'Data Processing'] },
           ].map(col => (
             <div key={col.t}>
               <div style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-green-400 tracking-widest mb-4">{col.t}</div>
               <div className="space-y-2">
-                {col.ls.map(l => <span key={l} title="This page is not available yet" style={{ fontFamily: "'JetBrains Mono',monospace" }} className="block text-xs text-slate-600 cursor-default">{l} · Soon</span>)}
+                {col.real.map(r => (
+                  <a key={r.l} href={r.href} style={{ fontFamily: "'JetBrains Mono',monospace" }}
+                     className="block text-xs text-slate-400 hover:text-green-400 transition-colors">{r.l}</a>
+                ))}
+                {col.soon.map(l => <span key={l} title="This page is not available yet" style={{ fontFamily: "'JetBrains Mono',monospace" }} className="block text-xs text-slate-600 cursor-default">{l} · Soon</span>)}
               </div>
             </div>
           ))}
         </div>
         <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <span style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-slate-600">© 2024 AgriShield Technologies Inc. All rights reserved.</span>
+          <span style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-slate-600">© 2026 AgriShield Technologies Inc. All rights reserved.</span>
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"/>
             <span style={{ fontFamily: "'JetBrains Mono',monospace" }} className="text-xs text-slate-600">Prototype · some features are not yet connected</span>
