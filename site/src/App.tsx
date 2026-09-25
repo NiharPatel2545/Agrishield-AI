@@ -352,9 +352,9 @@ function Hero() {
 
           <div className="flex gap-10 mt-14">
             {[
-              { v: '2.3B', l: 'Hectares Monitored' },
+              { v: 'Global', l: 'Satellite Coverage' },
               { v: '81.1%', l: 'Model Accuracy' },
-              { v: '143', l: 'Countries' },
+              { v: 'Seconds', l: 'Per-Scan Time' },
             ].map(s => (
               <div key={s.l}>
                 <div style={{ fontFamily: "'Barlow Condensed',sans-serif" }} className="text-3xl font-bold text-green-400 text-glow">{s.v}</div>
@@ -1253,10 +1253,10 @@ function Contact() {
 
           <div className="space-y-4">
             {[
-              { icon: '⚡', l: 'Quick Start', d: 'Enterprise pilots fully configured within 72 hours of onboarding.' },
+              { icon: '⚡', l: 'Fast Onboarding', d: 'Get set up quickly — no lengthy procurement cycle to start monitoring.' },
               { icon: '🌍', l: 'Global Coverage', d: 'Monitoring data available for all agricultural land on Earth.' },
-              { icon: '🔒', l: 'Data Sovereignty', d: 'All data processed within your jurisdiction. GDPR & ISO 27001 compliant.' },
-              { icon: '📡', l: 'API Access', d: 'REST + GraphQL APIs for direct integration into existing systems.' },
+              { icon: '🔒', l: 'Built with Privacy in Mind', d: 'We take data handling seriously as we build toward enterprise-grade practices.' },
+              { icon: '📡', l: 'API Access', d: 'A REST API for direct integration into existing systems.' },
             ].map(c => (
               <div key={c.l} className="glass rounded-xl p-4 border border-white/5 flex gap-4">
                 <div className="text-2xl shrink-0 mt-1">{c.icon}</div>
