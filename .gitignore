@@ -1,13 +1,48 @@
+# =========================
+# Secrets / environment
+# =========================
 .env
-*.csv
-*.pyc
-.DS_Store
-agrishield/__pycache__/
+.env.*
+!.env.example
+
+# =========================
+# Python
+# =========================
 __pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
 .ipynb_checkpoints/
+
+# Local virtual environments
+.venv/
+venv/
+env/
+
+# =========================
+# OS / IDE
+# =========================
+.DS_Store
+.vscode/
+
+# =========================
+# Datasets / local data
+# =========================
+*.csv
 LUCAS 2009/
 LUCAS 2015/
 LUCAS 2018/
 WoSIS/
 data/
+
+# =========================
+# Model artifacts
+# =========================
 models/*.joblib
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.log
