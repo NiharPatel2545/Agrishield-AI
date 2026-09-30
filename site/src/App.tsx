@@ -68,11 +68,13 @@ function Nav() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'nav-blur' : ''}`}>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#mission" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-7 h-7 rounded-md bg-green-500 flex items-center justify-center glow-green">
-            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-black">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM8 17.5v-11l9 5.5-9 5.5z"/>
-            </svg>
-          </div>
+        <div className="w-7 h-7 rounded-md overflow-hidden glow-green">
+          <img
+            src="/favicon.png"
+            alt="AgriShield"
+            className="w-full h-full object-contain"
+          />
+        </div>
           <span style={{ fontFamily: "'Barlow Condensed',sans-serif" }} className="text-xl font-bold tracking-wider text-white">
             AGRI<span className="text-green-400">SHIELD</span>
           </span>
