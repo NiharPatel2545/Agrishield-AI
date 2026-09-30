@@ -21,7 +21,8 @@ from agrishield.model import load_model, predict_proba, predict_oc
 from agrishield.inference import live_features, live_model_inputs
 from agrishield.farmer_report import farmer_report, suggest_crops
 from agrishield import weather as weather_module
-
+import logging
+logger = logging.getLogger("uvicorn.error")
 app = FastAPI(title="Agrishield API", version="0.1.0")
 
 # Browser calls from your deployed website (a different origin than this
@@ -115,6 +116,7 @@ def scan(
         # Never let a farmer see a raw Python traceback -- this is the
         # error-handling item from the roadmap. GEE/weather being briefly
         # unreachable should read as "try again shortly", not a stack trace.
+        logger.exception("live_features failed")
         raise HTTPException(
             status_code=503,
             detail="Soil data service is temporarily unavailable. Please try again shortly.",
