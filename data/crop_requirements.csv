@@ -1,0 +1,714 @@
+crop,ph_min,ph_max,category
+Abbo rubber tree,4.5,5.0,"fruits & nuts, materials"
+Abyssinian mustard,5.5,8.0,"forage/pasture, vegetables, cover crop"
+Acacia Coral,5.0,7.0,"forage/pasture, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Acacia brachystachya,5.5,7.0,"forage/pasture, fruits & nuts, forest/wood"
+Acanthosicyos horridus,6.0,7.0,"fruits & nuts, vegetables, medicinals & aromatic, environmental"
+Acanthosicyos naudinianus,6.0,6.5,fruits & nuts
+Adansonia gregorii,5.0,6.5,"forage/pasture, fruits & nuts, materials"
+Afetewa,5.5,7.0,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+Aframomum corrorima,5.5,6.5,"vegetables, medicinals & aromatic"
+African baobab,5.0,6.5,"fruits & nuts, environmental"
+African bitter yam,5.5,6.5,roots/tubers
+African ebony,5.5,6.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood"
+African locust bean,4.5,5.5,"pulses (grain legumes), forage/pasture, medicinals & aromatic, forest/wood, environmental"
+African nut tree,5.5,6.5,"vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+African plum,5.0,6.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+African rice,5.5,7.0,cereals & pseudocereals
+African tulip tree,5.0,7.5,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic, environmental"
+African walnut,5.0,6.5,"fruits & nuts, forest/wood"
+African yam bean,5.5,6.0,"pulses (grain legumes), roots/tubers, ornamentals/turf, medicinals & aromatic"
+Afrikaans rostvy,5.5,7.0,"fruits & nuts, materials, forest/wood, environmental"
+Alexandria laurel,5.5,7.0,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Algerian oat,5.5,7.0,"cereals & pseudocereals, forage/pasture"
+Amaranthus dubius,6.0,7.5,vegetables
+Amaranthus lividus,5.5,7.0,vegetables
+Amaranthus tricolor,5.5,7.5,"vegetables, ornamentals/turf"
+American beech,4.5,6.0,"fruits & nuts, ornamentals/turf, forest/wood"
+American chestnut,6.0,7.0,"fruits & nuts, materials, forest/wood"
+Ammandra natalia,5.5,6.5,"fruits & nuts, materials, environmental"
+Andean lupin,5.0,6.5,"pulses (grain legumes), forage/pasture, ornamentals/turf, medicinals & aromatic"
+Andean uvilla,6.0,7.0,fruits & nuts
+Annona atemoya,5.5,6.5,fruits & nuts
+Arachis glabrata,5.0,6.0,"pulses (grain legumes), forage/pasture"
+Araucaria angustifolia,5.5,6.5,"fruits & nuts, forest/wood"
+Archidendron jiringa,5.5,6.5,"fruits & nuts, vegetables, materials, medicinals & aromatic, forest/wood"
+Arrowroot,5.5,6.5,"roots/tubers, materials, medicinals & aromatic"
+Artocarpus chaplasha,5.0,6.5,"forage/pasture, fruits & nuts"
+Asian poke weed,5.5,7.5,"vegetables, ornamentals/turf, medicinals & aromatic, environmental"
+Atriplex hortensis,6.5,7.5,"forage/pasture, vegetables, ornamentals/turf"
+Avena fatau,5.0,6.5,"cereals & pseudocereals, forage/pasture, weed"
+Avena nuda,5.5,7.7,"cereals & pseudocereals, materials"
+Avena sterilis,6.5,7.5,"cereals & pseudocereals, forage/pasture, weed"
+Barbados flowerfence,6.5,7.5,"forage/pasture, fruits & nuts, ornamentals/turf, forest/wood, environmental, weed"
+Bassia latifolia,6.0,7.0,"fruits & nuts, forest/wood, environmental"
+Bauhinia esculenta,6.0,7.0,fruits & nuts
+Bauhinia rufescens,5.5,7.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Berchemia discolor,5.0,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Beta vulgaris var. crassa,6.0,6.8,"roots/tubers, forage/pasture, vegetables, materials, medicinals & aromatic"
+Beta vulgaris var. flavescens,6.0,7.0,vegetables
+Borojó,4.5,6.5,"fruits & nuts, medicinals & aromatic"
+Bramble wattle,6.0,7.5,"forage/pasture, fruits & nuts, materials, forest/wood, environmental"
+Brassica rapa Gaisin gr.,5.5,6.5,vegetables
+Brassica rapa var. rapifera,6.0,6.8,"roots/tubers, vegetables"
+Brazil cherry,6.0,7.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+Brazil eugenia,5.5,6.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+Brazil nut,5.5,7.0,"fruits & nuts, forest/wood"
+Brussels sprouts,6.0,7.0,vegetables
+Buchanania latifolia,5.5,6.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+California live oak,5.5,6.5,"fruits & nuts, materials, ornamentals/turf, forest/wood, environmental"
+Campanula rapunculus,6.5,7.0,"vegetables, weed"
+Canadian dwarf cornel,5.5,7.5,"fruits & nuts, ornamentals/turf"
+Canavalia brasiliensis,5.0,7.0,"pulses (grain legumes), environmental"
+Canistel,6.0,7.5,"fruits & nuts, vegetables"
+Cape Water-hawthorn,6.0,7.5,"vegetables, ornamentals/turf, medicinals & aromatic"
+Capsicum baccatum var. pendulum,6.0,6.5,fruits & nuts
+Capsicum chinense,6.0,6.5,vegetables
+Capsicum pubescens,6.0,6.5,vegetables
+Carissa carandas,6.5,8.0,"fruits & nuts, medicinals & aromatic, environmental"
+Caryocar nuciferum,6.0,6.5,"fruits & nuts, materials, forest/wood"
+Caryota urens,6.0,7.5,"fruits & nuts, materials, forest/wood"
+Cassia auriculata,6.0,7.0,"forage/pasture, vegetables, materials, ornamentals/turf, medicinals & aromatic, environmental"
+Cassia tomentosa,5.5,6.5,"forage/pasture, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, cover crop, environmental"
+Celosia,6.0,6.5,vegetables
+Chamaedorea sp.,5.0,6.0,vegetables
+Chilean strawberry,5.5,6.5,fruits & nuts
+Chinese cabbage,6.0,7.5,"vegetables, materials"
+Chinese chestnut,5.5,6.5,"fruits & nuts, materials, forest/wood"
+Chinese chives,6.0,6.8,"vegetables, medicinals & aromatic"
+Chinese gooseberry,6.0,7.0,fruits & nuts
+Chrysanthemum coronarium var. coronarium,6.0,6.5,"vegetables, ornamentals/turf, medicinals & aromatic, environmental"
+Citrus deliciosa,5.5,6.2,fruits & nuts
+Coffea excelsa,4.5,6.5,"forage/pasture, fruits & nuts, materials, environmental"
+Cola nitida,5.0,6.0,"fruits & nuts, environmental"
+Coleus amboinicus,6.0,6.5,"vegetables, medicinals & aromatic"
+Coleus parviflorus,6.0,6.5,roots/tubers
+Colocasia esculenta var. antiquorum,5.5,6.5,"roots/tubers, vegetables"
+Corylus colurna var. colurna,6.5,7.3,fruits & nuts
+Corylus maxima,6.0,6.5,fruits & nuts
+Cullenia rosayroana,5.0,6.0,fruits & nuts
+Curcuma zedoaria,5.5,6.5,"vegetables, materials"
+Dendrocalamus asper,5.0,6.5,"vegetables, materials"
+Dendrocalamus giganteus,5.5,6.5,"vegetables, materials"
+Dendrocalamus hamiltonii,5.0,6.0,"vegetables, materials"
+Dendrocalamus longispathus,5.0,6.0,"vegetables, materials"
+Dendrocalamus merrillianus,5.0,6.5,"vegetables, materials"
+Desmanthus bicornutus,7.0,8.0,"pulses (grain legumes), forage/pasture"
+Dichrostachys cinerea,5.0,8.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Dioscorea cayenensis,6.0,6.7,roots/tubers
+Dioscorea opposita,6.0,6.7,roots/tubers
+Diospyros malabarica,6.0,7.0,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood"
+Diospyros melanoxylon,5.5,7.0,"forage/pasture, fruits & nuts, medicinals & aromatic, forest/wood, environmental"
+Dovyalis hebecarpa,6.5,7.5,fruits & nuts
+Echinochloa frumentacea,5.5,6.5,"cereals & pseudocereals, forage/pasture, environmental"
+Ecuador laurel,6.5,7.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Egyptian lotus,6.0,6.5,"roots/tubers, vegetables, materials, ornamentals/turf, medicinals & aromatic"
+Elymus condensatus,6.0,7.0,"cereals & pseudocereals, forage/pasture"
+Eragrostis cilianensis,6.5,7.5,"cereals & pseudocereals, forage/pasture, weed"
+Eugenia uvalha,6.0,7.0,fruits & nuts
+European elder,6.0,7.5,"fruits & nuts, medicinals & aromatic"
+European raspberry,5.5,6.5,"fruits & nuts, medicinals & aromatic"
+European yellow pond-lily,5.0,7.5,"vegetables, ornamentals/turf, medicinals & aromatic"
+Euterpe chaunostachys,5.0,6.0,"fruits & nuts, environmental"
+Fagopyrum emarginatum,5.0,6.5,"cereals & pseudocereals, forage/pasture, cover crop, environmental"
+Fagus sylvatica ssp. sylvatica,5.0,7.0,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood"
+Garcinia multiflora,7.0,7.5,"fruits & nuts, materials, environmental"
+Garcinia xanthochymus,6.0,7.5,"fruits & nuts, materials"
+Ghilghoza pine,6.0,7.0,fruits & nuts
+Governor's plum,5.5,6.5,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Gracilaria tenuistipitata,6.5,7.5,vegetables
+Gracilaria verrucosa,7.5,8.0,"vegetables, materials"
+Grewia bicolor,5.5,7.0,"forage/pasture, fruits & nuts, medicinals & aromatic, forest/wood"
+Grewia tiliifolia,6.0,6.5,"forage/pasture, fruits & nuts, medicinals & aromatic, forest/wood"
+Guazuma ulmifolia,6.0,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental, weed"
+Guinea arrowroot,6.0,7.0,"roots/tubers, materials, medicinals & aromatic, environmental"
+Guinea grains,5.5,6.5,"fruits & nuts, medicinals & aromatic"
+Halls Creek wattle,5.5,7.0,"fruits & nuts, forest/wood, environmental, weed"
+Hippophae salicifolia,6.5,7.5,"forage/pasture, fruits & nuts, medicinals & aromatic, forest/wood, environmental"
+India wheat,5.5,6.5,"cereals & pseudocereals, forage/pasture, weed"
+Indian lac tree,5.5,6.5,"fruits & nuts, vegetables, materials, forest/wood"
+Indian laurel fig,5.0,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Indian mustard,5.5,6.5,"vegetables, materials"
+Indian rennet,6.5,7.5,"vegetables, medicinals & aromatic, weed"
+Injet (Amargna),7.0,7.5,"fruits & nuts, forest/wood"
+Italian stone pine,4.5,5.5,"fruits & nuts, ornamentals/turf, forest/wood, environmental"
+Japanese apricot,5.0,6.5,"fruits & nuts, ornamentals/turf"
+Japanese chestnut,5.5,6.0,"fruits & nuts, ornamentals/turf, forest/wood"
+Japanese plum,5.5,6.5,"fruits & nuts, ornamentals/turf"
+Java apple,6.0,7.5,"fruits & nuts, medicinals & aromatic, forest/wood"
+Jerusalem artichoke,6.0,6.6,"roots/tubers, forage/pasture, materials"
+Juglans hindsii,6.5,7.5,"fruits & nuts, ornamentals/turf, forest/wood"
+Juglans nigra,6.5,7.5,"fruits & nuts, forest/wood"
+Juglans sieboldiana,6.5,7.0,fruits & nuts
+Kei apple,5.5,6.5,"fruits & nuts, environmental"
+Kersting's groundnut,7.0,7.5,fruits & nuts
+Key lime,6.0,6.5,"fruits & nuts, materials, medicinals & aromatic"
+Kohlrabi,6.0,6.5,vegetables
+Kuteera-Gum,6.0,7.0,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+Lactuca indica,5.0,6.0,"forage/pasture, vegetables, medicinals & aromatic"
+Lemuropisum edule,6.5,8.0,"forage/pasture, fruits & nuts, environmental"
+Leucaena collinsii,6.5,8.0,"pulses (grain legumes), forage/pasture"
+Leucaena collinsii sp. collinsii,6.5,8.0,"pulses (grain legumes), forage/pasture"
+Leucaena pallida,6.5,7.5,"pulses (grain legumes), forage/pasture"
+Leucaena trichandra,5.5,7.5,"pulses (grain legumes), forage/pasture, environmental"
+Liberian coffee,5.3,6.2,"fruits & nuts, environmental"
+Livistona australis,5.5,7.0,"vegetables, ornamentals/turf"
+Lotus edulis,6.5,7.5,"pulses (grain legumes), forage/pasture"
+Lycium chinense,5.5,7.5,"vegetables, ornamentals/turf, medicinals & aromatic, cover crop, environmental"
+Machurian wild rice,5.5,6.0,"vegetables, materials, medicinals & aromatic"
+Malabar spinach,5.5,7.0,"vegetables, ornamentals/turf"
+Malay apple,5.5,6.5,"fruits & nuts, medicinals & aromatic, forest/wood"
+Melocanna baccifera,5.5,6.5,"vegetables, materials"
+Mesua ferrea,5.0,5.5,"fruits & nuts, forest/wood"
+Mexican avocado,5.0,7.0,"fruits & nuts, environmental"
+Miliusa velutina,6.5,7.0,"forage/pasture, fruits & nuts, materials"
+Momordica cochinchinensis,6.5,7.0,"vegetables, materials, medicinals & aromatic"
+Mulga,5.5,7.0,"fruits & nuts, forest/wood, environmental"
+Muraina grass,4.5,5.5,"cereals & pseudocereals, forage/pasture, weed"
+Musa acuminata,5.5,7.5,"forage/pasture, fruits & nuts"
+Musa acuminata x balbisiana,5.5,6.5,"fruits & nuts, vegetables, medicinals & aromatic, environmental"
+Musa balbisiana,5.5,7.0,"forage/pasture, fruits & nuts, medicinals & aromatic, environmental"
+Musa halabanensis,5.5,7.0,vegetables
+Musa salaccensis,5.5,7.0,vegetables
+Myrciaria cauliflora,5.5,7.5,fruits & nuts
+Nasturtium schlechteri,5.0,6.5,vegetables
+Neptunia prostrata,5.0,6.5,vegetables
+Nonda plums,5.5,7.0,"fruits & nuts, forest/wood, environmental"
+Ocimum americanum,6.0,7.0,"vegetables, medicinals & aromatic, environmental"
+Oncosperma tigillarium,6.0,6.5,"vegetables, materials, ornamentals/turf, forest/wood"
+Onions (bulb),6.0,7.0,"vegetables, environmental"
+Oryza sativa ssp. indica,5.0,8.0,"cereals & pseudocereals, forage/pasture, materials"
+Oryza sativa ssp. javanica,5.5,7.0,"cereals & pseudocereals, forage/pasture, materials"
+Pachystela msolo,5.5,7.0,"fruits & nuts, forest/wood"
+Pak Choi,5.5,7.0,vegetables
+Panicum antidotale,6.0,7.5,"cereals & pseudocereals, forage/pasture"
+Panicum sumatrense,5.5,6.2,"cereals & pseudocereals, forage/pasture"
+Parkia speciosa,5.5,7.0,"vegetables, medicinals & aromatic, forest/wood, environmental"
+Paspalum scrobiculatum,4.8,6.0,"cereals & pseudocereals, forage/pasture, weed"
+Passiflora edulis var. edulis,5.5,7.5,"fruits & nuts, environmental"
+Pecan,5.5,7.0,"fruits & nuts, forest/wood"
+Pentaclethra macrophylla,4.5,5.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Persoonia falcata,5.0,6.0,"fruits & nuts, medicinals & aromatic, forest/wood"
+Phaseolus polyanthus,6.2,6.5,"pulses (grain legumes), forage/pasture, cover crop"
+Phoenix sylvestris,5.5,7.5,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, environmental"
+Pistachio nut,7.0,8.0,"fruits & nuts, materials, medicinals & aromatic"
+Polyscias verticillata,5.5,7.0,vegetables
+Portulaca quadrifida L.,5.5,6.5,"forage/pasture, vegetables, ornamentals/turf, medicinals & aromatic, weed"
+Prosopis alba,5.0,6.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental, weed"
+Prosopis chilensis,6.5,7.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, forest/wood, environmental"
+Prosopis glandulosa,5.5,7.0,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental, weed"
+Prosopis pallida,5.5,6.0,"pulses (grain legumes), forage/pasture, materials, ornamentals/turf, forest/wood, environmental, weed"
+Prosopis tamarugo,7.0,8.0,"forage/pasture, vegetables, forest/wood, environmental, weed"
+Psidium friedrichsthalianum,6.5,7.2,"fruits & nuts, ornamentals/turf, forest/wood"
+Pterocarpus dalbergioides,5.5,6.5,"vegetables, materials, medicinals & aromatic, forest/wood"
+Pterocarpus lucens,5.5,7.0,"forage/pasture, vegetables, medicinals & aromatic"
+Rauvolfia serpentina,5.5,7.0,"vegetables, environmental"
+Ribes hirtellum,6.5,7.5,fruits & nuts
+Ribes sativum,6.0,6.5,fruits & nuts
+River cooba,7.0,8.0,"forage/pasture, fruits & nuts, forest/wood, environmental"
+Rubus occidentalis x idaeus,6.0,7.0,fruits & nuts
+Rungia,5.5,6.2,vegetables
+Ruta graveolens var. bracteosa,6.5,7.5,"vegetables, materials, ornamentals/turf"
+Saccharum spontaneum,5.0,6.0,"forage/pasture, vegetables, materials"
+Salacca wallichiana,5.0,6.0,"fruits & nuts, materials, environmental"
+Salacca zalacca,5.0,6.0,"fruits & nuts, environmental"
+Sambucus cerulea,6.0,7.0,"forage/pasture, fruits & nuts"
+Santalum acuminatum,7.0,8.0,"fruits & nuts, forest/wood"
+Sapodilla,6.0,7.0,"fruits & nuts, materials, forest/wood, environmental"
+Satsuma mandarin,5.5,6.5,fruits & nuts
+Sauropus androgynus,6.0,7.0,"forage/pasture, fruits & nuts, vegetables, medicinals & aromatic, environmental"
+Schilf,5.5,6.5,"forage/pasture, vegetables, materials, ornamentals/turf, medicinals & aromatic, environmental, weed"
+Sclerocarya caffra,5.5,6.5,fruits & nuts
+Sea grape,6.5,7.5,"fruits & nuts, materials, ornamentals/turf, forest/wood, environmental"
+Shorea robusta,5.0,6.7,"forage/pasture, fruits & nuts, materials, forest/wood, environmental"
+Siberian peashrub,6.5,8.5,"vegetables, medicinals & aromatic, environmental"
+Silver beet,6.0,7.0,"roots/tubers, vegetables"
+Solanum oleraceum,6.5,7.5,"vegetables, medicinals & aromatic"
+Soncoya,5.5,6.5,"fruits & nuts, medicinals & aromatic"
+Stachys affinis,6.0,6.5,"roots/tubers, cover crop"
+Sterculia foetida,6.0,7.5,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood"
+Strychnos innocua,5.5,6.5,"forage/pasture, fruits & nuts, medicinals & aromatic, forest/wood"
+Sword bean,5.0,6.0,"pulses (grain legumes), forage/pasture, vegetables, cover crop, environmental"
+Syzygium guineense,5.5,7.0,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+Tahiti lime,5.5,6.5,fruits & nuts
+Telfairia occidentalis,5.0,6.0,vegetables
+Telfairia pedata,5.5,6.0,fruits & nuts
+Teosinte,5.5,7.0,"cereals & pseudocereals, forage/pasture, weed"
+Teramnus labialis,6.0,8.0,"pulses (grain legumes), forage/pasture, medicinals & aromatic, environmental"
+Tetragonia tetragonioides,6.5,7.0,vegetables
+Thaumatococcus daniellii,4.5,5.0,"fruits & nuts, materials"
+Theobroma bicolor,5.0,6.0,"fruits & nuts, environmental"
+Triticum dicoccon,5.5,6.8,"cereals & pseudocereals, forage/pasture"
+Tropical almond,5.0,7.0,"fruits & nuts, materials, ornamentals/turf, forest/wood, environmental"
+Typha domingensis,6.5,7.5,"roots/tubers, vegetables, materials, medicinals & aromatic, environmental"
+Virginia strawberry,5.5,7.0,fruits & nuts
+Water dropwort,5.5,6.5,vegetables
+Wayaka yam bean,6.5,8.0,"pulses (grain legumes), roots/tubers, forage/pasture, environmental"
+Xanthosoma brasiliense,5.0,6.0,vegetables
+Yucca,5.0,6.0,"vegetables, ornamentals/turf, environmental"
+abata kola,5.0,6.0,"fruits & nuts, environmental"
+abelmoskus,5.5,7.0,vegetables
+acerola,5.5,7.5,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+achira,5.5,6.5,"roots/tubers, forage/pasture, materials, environmental"
+adquiere,5.0,7.0,"fruits & nuts, materials, medicinals & aromatic"
+adzuki bean,5.5,6.5,"pulses (grain legumes), forage/pasture, medicinals & aromatic, environmental"
+ahipa,5.5,6.5,roots/tubers
+aidan tree,4.5,6.5,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+akamba (Bena),6.5,7.5,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+akee,5.5,6.5,fruits & nuts
+algarroba,6.5,7.5,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood"
+allspice,7.0,7.5,fruits & nuts
+almond,6.5,7.0,"fruits & nuts, medicinals & aromatic"
+amaranth,5.5,7.5,vegetables
+amaranths,5.5,7.5,"cereals & pseudocereals, forage/pasture, vegetables, ornamentals/turf, medicinals & aromatic"
+ambarella,5.5,6.5,"fruits & nuts, medicinals & aromatic"
+amla,6.0,8.0,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic, environmental"
+amole,6.5,7.5,"roots/tubers, vegetables, materials, medicinals & aromatic"
+angled loofah,5.5,7.0,"vegetables, materials, medicinals & aromatic"
+apios,5.0,7.5,"roots/tubers, vegetables"
+apple,6.0,7.0,"fruits & nuts, materials, ornamentals/turf, forest/wood"
+apricot,6.5,7.0,"forage/pasture, fruits & nuts, materials"
+arazá,5.0,6.0,"fruits & nuts, ornamentals/turf, environmental"
+arracacha,5.0,6.0,roots/tubers
+arrow-poison plant,5.5,6.5,"fruits & nuts, materials"
+asparagus,6.0,6.7,"vegetables, medicinals & aromatic"
+asparagus bean,5.5,7.0,"pulses (grain legumes), forage/pasture, environmental"
+atemoya,5.5,6.5,fruits & nuts
+avocado,5.0,5.8,"fruits & nuts, forest/wood"
+awl tree,5.0,6.5,"fruits & nuts, medicinals & aromatic, forest/wood, environmental"
+babassu palm,5.5,6.5,"fruits & nuts, materials, forest/wood"
+bachanta,5.5,7.5,"cereals & pseudocereals, forage/pasture, medicinals & aromatic"
+bael,6.0,7.5,"fruits & nuts, medicinals & aromatic"
+bambara groundnut,5.0,6.5,pulses (grain legumes)
+bamboo,5.0,6.5,"vegetables, materials, environmental"
+banana,5.0,7.0,fruits & nuts
+banana passion,6.0,7.0,"fruits & nuts, ornamentals/turf, weed"
+baobab,5.5,7.0,"fruits & nuts, materials, ornamentals/turf"
+barbasco,6.0,6.5,roots/tubers
+bard vetch,6.0,7.0,"pulses (grain legumes), forage/pasture"
+barinas nut,5.0,6.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+barley,6.5,7.5,"cereals & pseudocereals, medicinals & aromatic"
+barnyard grass,6.0,7.0,"cereals & pseudocereals, forage/pasture, vegetables, environmental, weed"
+basil,6.0,7.0,"vegetables, medicinals & aromatic, weed"
+basul,5.5,7.0,"pulses (grain legumes), forage/pasture, medicinals & aromatic, forest/wood, environmental"
+bataua,4.8,5.5,"forage/pasture, fruits & nuts, materials"
+bdellium,6.0,7.5,"forage/pasture, vegetables, medicinals & aromatic, environmental"
+beggar's tick,4.5,8.0,"vegetables, ornamentals/turf, medicinals & aromatic, weed"
+ber,5.5,7.5,"forage/pasture, fruits & nuts, medicinals & aromatic, forest/wood"
+bergamot orange,5.0,6.5,"fruits & nuts, medicinals & aromatic"
+betel nut palm,5.5,6.0,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+bignay,6.0,7.0,"fruits & nuts, ornamentals/turf"
+bilberry,4.5,6.0,"fruits & nuts, medicinals & aromatic"
+bitter gourd,6.0,6.5,"fruits & nuts, vegetables, ornamentals/turf, environmental"
+bitter potato,6.0,7.0,roots/tubers
+bitter vetch,7.0,7.5,"pulses (grain legumes), forage/pasture, environmental"
+bitterleaf,5.5,7.0,"forage/pasture, vegetables, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+black currant,6.5,7.5,fruits & nuts
+black gram,5.5,6.5,"pulses (grain legumes), forage/pasture, medicinals & aromatic, cover crop, environmental"
+black mulberry,5.5,7.0,"fruits & nuts, medicinals & aromatic"
+black raspberry,6.0,7.0,fruits & nuts
+black sapote,6.0,7.0,fruits & nuts
+black velevet,5.5,7.0,"fruits & nuts, vegetables, forest/wood, environmental"
+black-eyed pea,5.5,7.5,"pulses (grain legumes), forage/pasture, vegetables"
+blimbi,5.5,6.5,"fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+blue clitoria,6.5,7.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, cover crop"
+blue lupine,5.5,7.0,"pulses (grain legumes), forage/pasture, medicinals & aromatic"
+borage,6.5,7.5,"vegetables, ornamentals/turf, medicinals & aromatic"
+borasusspalm,5.5,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+branching onion,6.6,7.4,vegetables
+breadfruit,5.5,6.5,fruits & nuts
+broad bean,5.5,7.0,"pulses (grain legumes), forage/pasture, vegetables, ornamentals/turf, medicinals & aromatic"
+broccoli,6.0,6.8,vegetables
+broom-corn,6.0,7.0,"cereals & pseudocereals, forage/pasture, materials, medicinals & aromatic"
+browntop millet,7.0,7.5,"cereals & pseudocereals, forage/pasture"
+buckwheat,5.0,6.5,"cereals & pseudocereals, forage/pasture, vegetables, materials, cover crop"
+buffalo bean,5.0,7.0,"forage/pasture, vegetables, environmental"
+buffalo thorn,5.5,8.0,"forage/pasture, fruits & nuts, vegetables, materials, medicinals & aromatic, forest/wood, environmental"
+bulbous barley,5.5,7.0,cereals & pseudocereals
+bur-reed,6.0,7.5,"roots/tubers, vegetables, ornamentals/turf, medicinals & aromatic"
+buriti palm,4.0,5.0,"fruits & nuts, materials, environmental"
+bush mango,5.0,7.0,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood"
+bush orange,5.5,7.5,"fruits & nuts, medicinals & aromatic"
+bwa blan,6.0,8.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+cabbage,6.0,7.5,vegetables
+cactus pear,7.0,7.5,fruits & nuts
+caimito,5.0,5.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+calabas,5.5,7.0,"fruits & nuts, vegetables, materials, medicinals & aromatic"
+calabur tree,5.5,6.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+calamondin,5.5,7.0,"fruits & nuts, materials, environmental"
+canihua,6.0,7.5,"pulses (grain legumes), medicinals & aromatic"
+canna lily,5.5,7.5,"roots/tubers, materials, ornamentals/turf, medicinals & aromatic, environmental"
+caper,6.5,7.5,"vegetables, ornamentals/turf, medicinals & aromatic"
+capulin,5.5,6.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood"
+cardoon,5.5,7.0,"forage/pasture, vegetables, ornamentals/turf, medicinals & aromatic, weed"
+casimiroa,7.0,7.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+cassava,5.5,8.0,roots/tubers
+catchthorn,5.5,7.5,"forage/pasture, fruits & nuts, vegetables, materials, medicinals & aromatic, forest/wood, environmental"
+cauliflower,6.0,7.0,vegetables
+cayenne pepper,5.5,6.8,fruits & nuts
+celeriac,6.0,6.8,vegetables
+celery,5.8,6.8,"vegetables, materials"
+chamborote,5.5,7.0,"pulses (grain legumes), roots/tubers, forage/pasture, ornamentals/turf, medicinals & aromatic, cover crop"
+chaya,5.5,6.5,"vegetables, medicinals & aromatic"
+chayote,5.5,7.0,"vegetables, medicinals & aromatic"
+chempedak,4.5,6.0,"forage/pasture, fruits & nuts, ornamentals/turf, forest/wood"
+cherimoya,6.0,7.5,"fruits & nuts, medicinals & aromatic"
+cherry guava,5.5,6.5,"fruits & nuts, ornamentals/turf"
+chestnut,5.0,6.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+chickpea,6.0,8.5,pulses (grain legumes)
+chicory,6.0,7.5,"vegetables, medicinals & aromatic"
+chinquapin,5.5,6.0,"fruits & nuts, medicinals & aromatic, environmental"
+chives,6.0,6.6,vegetables
+citron,6.5,7.0,"fruits & nuts, medicinals & aromatic"
+citrus,5.0,6.5,"fruits & nuts, ornamentals/turf"
+club wheat,6.5,7.5,"cereals & pseudocereals, forage/pasture"
+cocoa,5.0,6.5,"fruits & nuts, medicinals & aromatic"
+cocona shrub,6.8,7.2,fruits & nuts
+coconut,5.0,8.0,"fruits & nuts, materials, forest/wood"
+coffee senna,6.0,7.0,"fruits & nuts, ornamentals/turf, environmental"
+cohune palm,5.0,7.0,"fruits & nuts, vegetables, materials, ornamentals/turf"
+coleus potato,6.5,7.0,"roots/tubers, medicinals & aromatic"
+common bean,5.5,7.5,"pulses (grain legumes), forage/pasture, vegetables, medicinals & aromatic"
+common club-rush,6.0,7.0,"roots/tubers, vegetables, materials, ornamentals/turf, environmental"
+common elder,6.0,6.5,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic"
+common fig,6.0,7.0,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+common plum,5.5,6.1,"fruits & nuts, medicinals & aromatic"
+common wild medlar,5.5,7.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+congo pea,5.0,7.0,vegetables
+coral bean,4.5,6.5,"forage/pasture, vegetables, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+coriander,5.5,7.5,"vegetables, materials, medicinals & aromatic"
+corn,5.0,7.0,"cereals & pseudocereals, forage/pasture, vegetables, materials, environmental"
+cornelian cherry,6.5,8.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+costela de Adão,5.5,6.0,"fruits & nuts, ornamentals/turf"
+cow pea,5.5,7.5,"pulses (grain legumes), forage/pasture, vegetables, environmental"
+cranberry,5.0,5.5,fruits & nuts
+cress,6.0,7.0,vegetables
+crowfoot grass,6.5,7.5,"cereals & pseudocereals, forage/pasture, weed"
+cucumber,6.0,7.5,"fruits & nuts, vegetables, materials, medicinals & aromatic"
+cultivated yam,5.5,6.5,"roots/tubers, environmental"
+cupuassu,5.0,6.5,"fruits & nuts, environmental"
+cush-cush,6.0,6.7,roots/tubers
+custard apple,5.0,7.5,fruits & nuts
+date palm,6.5,8.0,fruits & nuts
+desert date,7.0,8.0,"fruits & nuts, medicinals & aromatic, weed"
+dewberry,5.5,6.5,"fruits & nuts, medicinals & aromatic"
+dogwood,5.5,6.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic, environmental"
+dom (Sudan),6.5,7.5,"forage/pasture, fruits & nuts, vegetables, materials, medicinals & aromatic, forest/wood, environmental"
+doum palm,6.0,7.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+downy birch,4.5,7.5,"vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+durian,5.0,6.5,"fruits & nuts, medicinals & aromatic"
+duruka,5.0,6.0,vegetables
+durum wheat,6.0,7.0,cereals & pseudocereals
+dwarf kumquat,6.5,7.5,"fruits & nuts, medicinals & aromatic"
+eelgrass,6.8,7.2,"forage/pasture, fruits & nuts, vegetables"
+eggplant,5.5,6.8,"vegetables, medicinals & aromatic"
+elephant foot yam,5.5,6.2,vegetables
+endive,6.5,7.8,vegetables
+enset,5.6,7.3,"vegetables, materials, ornamentals/turf, medicinals & aromatic"
+erima,4.5,5.5,"vegetables, materials, forest/wood"
+euterpe palm,5.0,5.5,"fruits & nuts, vegetables, ornamentals/turf"
+false medlar,5.5,7.0,"fruits & nuts, medicinals & aromatic, forest/wood"
+false pickerelweed,5.0,6.5,"forage/pasture, vegetables, ornamentals/turf, medicinals & aromatic, weed"
+fancy yam,5.5,6.5,"roots/tubers, forage/pasture, environmental"
+feijoa,5.5,7.0,"fruits & nuts, ornamentals/turf, environmental"
+fennel,6.5,7.5,"vegetables, materials, medicinals & aromatic"
+fey dayiti,6.5,8.0,"forage/pasture, vegetables, materials, ornamentals/turf, medicinals & aromatic, environmental"
+fig-leaved gourd,6.4,7.5,"vegetables, materials, ornamentals/turf"
+finger millet,6.0,7.0,"cereals & pseudocereals, forage/pasture, environmental"
+firefly mangrove,6.7,7.3,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+five corner,5.5,6.5,"fruits & nuts, materials, medicinals & aromatic"
+float grass,4.5,8.0,"cereals & pseudocereals, materials"
+flowering rush,5.0,8.0,"roots/tubers, ornamentals/turf, weed"
+fodder radish,6.0,6.5,"forage/pasture, vegetables, environmental"
+fonio,5.5,6.5,cereals & pseudocereals
+food inga,5.0,6.5,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+football fruit,5.5,6.5,fruits & nuts
+foxtail millet,6.0,6.8,"cereals & pseudocereals, forage/pasture"
+galangal,5.5,6.5,"vegetables, medicinals & aromatic"
+galingale,5.5,7.5,"vegetables, materials, ornamentals/turf, medicinals & aromatic"
+garden burnet,6.5,7.5,"forage/pasture, vegetables"
+garden vetch,6.0,7.0,"pulses (grain legumes), forage/pasture, environmental"
+garlic,6.0,6.6,"vegetables, medicinals & aromatic"
+gboma eggplant,6.5,7.5,"vegetables, ornamentals/turf"
+gean,5.5,6.5,"fruits & nuts, medicinals & aromatic, forest/wood"
+genipap,5.5,7.0,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood"
+gherkin,6.0,7.5,vegetables
+ghogar tree,6.0,7.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+giant granadilla,6.5,7.5,fruits & nuts
+giant taro,5.7,6.3,vegetables
+globe artichoke,6.0,6.5,"vegetables, materials, medicinals & aromatic"
+gomor,6.5,8.0,"forage/pasture, fruits & nuts, medicinals & aromatic, environmental"
+goose foot,5.5,6.5,"cereals & pseudocereals, forage/pasture, vegetables, environmental, weed"
+gooseberry,6.0,7.0,"fruits & nuts, medicinals & aromatic"
+goosefoot,6.0,7.0,"forage/pasture, vegetables, materials"
+gourka,7.0,7.5,"fruits & nuts, materials, medicinals & aromatic"
+grape,5.5,7.5,"fruits & nuts, medicinals & aromatic"
+grapefruit,6.5,7.3,fruits & nuts
+grass pea,6.0,7.5,"pulses (grain legumes), forage/pasture, environmental"
+great burdock,6.5,8.0,"vegetables, medicinals & aromatic"
+green arrow arum,4.0,8.0,"vegetables, environmental"
+green gram (India),5.5,6.2,"pulses (grain legumes), forage/pasture, cover crop, environmental"
+green longan,5.0,6.0,fruits & nuts
+groenklapper,5.0,7.0,"forage/pasture, fruits & nuts, vegetables, materials, medicinals & aromatic, forest/wood"
+groundnut,5.5,6.5,"pulses (grain legumes), vegetables, materials, medicinals & aromatic"
+guaba,6.0,8.0,"fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+guanaguanare,5.0,7.0,"fruits & nuts, medicinals & aromatic"
+guar bean,7.5,8.0,"forage/pasture, fruits & nuts, vegetables, materials, medicinals & aromatic"
+guava,5.5,7.5,"fruits & nuts, forest/wood, environmental, weed"
+gum arabic,5.0,7.0,"pulses (grain legumes), forage/pasture, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+gunnera,5.5,7.0,"vegetables, materials, ornamentals/turf, medicinals & aromatic"
+hairy-fruited eggplant,5.5,7.0,"vegetables, medicinals & aromatic"
+halleko,6.0,8.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+hardy kiwi,5.0,6.5,"fruits & nuts, environmental"
+hausa potato,6.5,7.5,roots/tubers
+hazel nut,6.0,6.5,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+high-bush blueberry,4.0,5.0,fruits & nuts
+hollyhock mallow,6.5,8.0,"vegetables, materials, ornamentals/turf, medicinals & aromatic"
+honey-locust,5.5,8.0,"pulses (grain legumes), forage/pasture, materials, ornamentals/turf, forest/wood, environmental"
+hoop pine,5.0,6.5,"fruits & nuts, ornamentals/turf, forest/wood"
+horse gram,5.5,7.0,"pulses (grain legumes), forage/pasture, medicinals & aromatic, environmental"
+horseradish,6.0,7.0,vegetables
+horseradish tree,5.5,7.0,"forage/pasture, fruits & nuts, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+hyacinth bean,5.0,7.5,"forage/pasture, vegetables, ornamentals/turf, cover crop, environmental"
+ilama,7.0,8.0,fruits & nuts
+intip-intip,7.0,8.5,vegetables
+ipecac,5.0,6.0,roots/tubers
+jack bean,5.0,6.0,"pulses (grain legumes), forage/pasture, cover crop"
+jack fruit,5.5,7.5,"fruits & nuts, medicinals & aromatic, forest/wood"
+jatobá,4.8,6.8,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+jejeba,6.5,7.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+jojoba,6.5,7.5,"forage/pasture, fruits & nuts, materials, medicinals & aromatic"
+kaki,5.5,6.5,"fruits & nuts, medicinals & aromatic"
+kang kong,5.0,7.0,"forage/pasture, vegetables"
+kapok,5.5,6.5,"forage/pasture, fruits & nuts, materials, forest/wood, environmental"
+karsatta (Konsogna),6.0,8.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, forest/wood"
+khash,5.0,6.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood"
+kudzu,5.5,6.5,"roots/tubers, forage/pasture, ornamentals/turf, environmental, weed"
+lamb's-quarters,6.0,7.0,"vegetables, medicinals & aromatic, weed"
+langsat,6.0,6.5,"fruits & nuts, medicinals & aromatic"
+large num-num,5.5,6.5,"fruits & nuts, ornamentals/turf, environmental"
+large-leaved rock fig,6.0,6.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+leafcup,5.5,6.5,"roots/tubers, materials, cover crop"
+lemon,6.5,7.0,"fruits & nuts, materials, medicinals & aromatic"
+lentil,5.5,7.5,"pulses (grain legumes), medicinals & aromatic"
+lettuce,6.0,7.0,vegetables
+liquorice,6.5,7.5,"roots/tubers, forage/pasture, materials, medicinals & aromatic"
+litchi,5.5,6.5,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+longan,5.5,6.0,"fruits & nuts, ornamentals/turf, medicinals & aromatic, environmental"
+loquat,5.5,6.5,"fruits & nuts, medicinals & aromatic"
+lovage,6.0,7.0,"roots/tubers, medicinals & aromatic"
+low-bush blueberry,4.2,5.2,"fruits & nuts, medicinals & aromatic"
+lucuma,6.5,7.5,"fruits & nuts, forest/wood"
+lutqua,5.0,6.0,"fruits & nuts, ornamentals/turf, forest/wood, environmental"
+macadamia nut,5.0,6.0,"fruits & nuts, materials, ornamentals/turf, forest/wood, environmental"
+macauba palm,5.5,6.5,"fruits & nuts, materials, ornamentals/turf, environmental"
+mahanim,5.5,6.5,"forage/pasture, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+mahogany bean,5.0,7.0,"vegetables, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+male bamboo,4.5,5.5,"vegetables, materials"
+mamey,6.0,6.5,"fruits & nuts, medicinals & aromatic"
+mamoncillo,5.5,7.0,fruits & nuts
+mamuang himmaphan,4.5,6.5,"fruits & nuts, medicinals & aromatic"
+mandarin,6.0,6.8,fruits & nuts
+mango,5.5,7.5,"fruits & nuts, medicinals & aromatic, forest/wood"
+mangosteen,5.0,6.0,"fruits & nuts, medicinals & aromatic, forest/wood"
+mangrove,6.5,7.0,"fruits & nuts, forest/wood"
+maní forrajero,5.4,6.0,"pulses (grain legumes), forage/pasture, ornamentals/turf"
+marama bean,5.5,7.0,"pulses (grain legumes), roots/tubers, forage/pasture"
+marrow,5.5,6.8,"fruits & nuts, vegetables, materials"
+marula,6.0,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+mashua,6.0,7.0,roots/tubers
+mauka,6.0,7.0,"roots/tubers, vegetables"
+melon shrub,6.5,7.0,vegetables
+menteng,5.0,5.5,"fruits & nuts, materials, ornamentals/turf"
+mitserie,5.0,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+mitsuba,5.0,7.5,"vegetables, medicinals & aromatic, environmental"
+mobola-plum,5.5,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+mongongo nut,6.5,8.0,"forage/pasture, fruits & nuts, environmental"
+mopane,5.5,7.5,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+moru oak,5.5,7.0,"fruits & nuts, ornamentals/turf, forest/wood"
+moth bean,6.5,7.5,"pulses (grain legumes), forage/pasture, vegetables, environmental"
+mountain papaw,6.0,7.0,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+mountain soursop,5.5,7.0,"fruits & nuts, vegetables, medicinals & aromatic"
+mukukuma,5.0,6.0,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+mulberry,5.5,7.5,"forage/pasture, fruits & nuts, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+muscadine grape,6.0,7.0,fruits & nuts
+musk mallow,7.0,8.0,"vegetables, materials, ornamentals/turf, environmental"
+myrobalan,5.5,6.5,"fruits & nuts, materials, medicinals & aromatic"
+naranjilla,6.5,7.0,"fruits & nuts, ornamentals/turf"
+neka (Simbo),5.5,7.0,"vegetables, ornamentals/turf, medicinals & aromatic"
+nettle,7.0,8.5,"vegetables, materials, medicinals & aromatic"
+ngali nut,6.0,7.5,"fruits & nuts, ornamentals/turf, forest/wood"
+nypa palm,6.5,7.5,"fruits & nuts, environmental"
+oat,5.0,6.0,"cereals & pseudocereals, cover crop"
+oca,6.0,7.0,roots/tubers
+old-world arrowhead,6.0,7.5,roots/tubers
+one one,5.5,6.5,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+onion,6.0,7.0,"vegetables, medicinals & aromatic"
+orange,5.0,6.0,fruits & nuts
+orange mangrove,7.0,8.0,"fruits & nuts, vegetables, materials, forest/wood, environmental"
+orchid tree,5.5,7.0,"forage/pasture, fruits & nuts, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood"
+oval kumquat,6.5,7.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic, environmental"
+ox eye daisy,5.2,7.0,"vegetables, ornamentals/turf, medicinals & aromatic"
+pacay,5.0,6.5,"forage/pasture, fruits & nuts, ornamentals/turf, forest/wood, environmental"
+pacaya palm,6.5,7.5,"vegetables, ornamentals/turf"
+padauk,5.5,6.5,"vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+pale serviceberry,5.5,6.5,fruits & nuts
+palmiteiro,4.5,5.0,fruits & nuts
+papaw,6.0,7.2,"fruits & nuts, materials, medicinals & aromatic"
+papaya,5.5,7.0,"fruits & nuts, medicinals & aromatic"
+paper mulberry,5.0,7.5,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic"
+parsley,6.0,7.5,"vegetables, medicinals & aromatic"
+parsnip,6.0,6.8,vegetables
+passionfruit,6.0,8.0,"fruits & nuts, ornamentals/turf"
+pea,5.5,7.0,"pulses (grain legumes), medicinals & aromatic"
+peach,5.5,6.3,"fruits & nuts, ornamentals/turf, environmental"
+peach palm,5.0,6.5,"fruits & nuts, forest/wood"
+pear,5.5,6.5,"fruits & nuts, forest/wood"
+pearl millett,5.0,6.5,cereals & pseudocereals
+pepper bark tree,5.5,6.5,"fruits & nuts, medicinals & aromatic, forest/wood"
+pepper grass,6.5,7.5,roots/tubers
+perilla,5.5,7.2,"vegetables, materials, ornamentals/turf, medicinals & aromatic, weed"
+phalsa,6.0,7.5,fruits & nuts
+pharaoh's fig,5.5,7.0,"forage/pasture, fruits & nuts, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+pickerel weed,6.0,7.5,"vegetables, ornamentals/turf, medicinals & aromatic"
+pilinut,5.0,6.0,"fruits & nuts, materials, ornamentals/turf"
+pineapple,4.5,8.0,fruits & nuts
+pineapple guava,5.5,7.0,"fruits & nuts, ornamentals/turf"
+pitahaya,5.3,6.7,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+poeierkwasboom,5.5,7.0,"vegetables, materials, ornamentals/turf, medicinals & aromatic"
+pomegranate,6.5,7.5,"fruits & nuts, medicinals & aromatic"
+pomelo,5.5,7.0,fruits & nuts
+poshte,5.5,6.5,fruits & nuts
+potato,5.0,6.2,"roots/tubers, medicinals & aromatic"
+potato onion,6.0,7.0,vegetables
+potato yam,6.0,6.7,vegetables
+potherb fameflower,5.0,6.5,"forage/pasture, vegetables, ornamentals/turf, medicinals & aromatic, weed"
+prickly solanum,5.0,6.0,"vegetables, medicinals & aromatic, weed"
+prince's feather,6.0,7.0,"cereals & pseudocereals, vegetables"
+proso millet,6.0,6.5,cereals & pseudocereals
+puero,4.5,6.5,"roots/tubers, forage/pasture, materials, environmental"
+pulasan,5.0,5.8,"fruits & nuts, materials, medicinals & aromatic, forest/wood"
+pumpkin,5.5,7.5,"forage/pasture, fruits & nuts, vegetables, materials, medicinals & aromatic"
+purslane,5.5,7.0,"vegetables, medicinals & aromatic"
+quince,6.0,6.5,"fruits & nuts, materials, medicinals & aromatic"
+quinoa,5.5,8.0,"cereals & pseudocereals, forage/pasture, vegetables, medicinals & aromatic"
+radish,6.0,7.0,"vegetables, materials, environmental"
+rain tree saman,5.5,6.5,"forage/pasture, fruits & nuts, materials, ornamentals/turf, forest/wood, environmental"
+rakkyo,5.5,6.5,"vegetables, medicinals & aromatic"
+rambai,5.0,6.0,"fruits & nuts, materials, ornamentals/turf, environmental"
+rambutan,5.0,6.5,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+rape,6.5,7.6,"forage/pasture, vegetables, materials"
+rat-tailed radish,6.0,6.5,vegetables
+rattlepod,5.5,6.5,"forage/pasture, vegetables, environmental"
+red current,6.5,7.5,"fruits & nuts, medicinals & aromatic"
+red mombin,6.0,7.0,fruits & nuts
+red mulberry,5.5,7.0,fruits & nuts
+red tasselflower,4.5,6.5,"vegetables, medicinals & aromatic, weed"
+reed mace,4.5,7.5,"forage/pasture, vegetables, materials, medicinals & aromatic, environmental"
+rhubarb,6.0,7.0,"vegetables, medicinals & aromatic"
+rice,5.5,7.0,cereals & pseudocereals
+rice bean,6.0,7.5,"pulses (grain legumes), forage/pasture, vegetables, cover crop, environmental"
+river bean,5.0,7.0,"forage/pasture, vegetables, materials, forest/wood, environmental"
+rock melon,6.0,7.5,"vegetables, materials, environmental"
+rose-of-Sharon,5.5,7.5,"vegetables, materials, ornamentals/turf, medicinals & aromatic"
+roseapple,5.5,7.0,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+roselle,5.5,7.5,"forage/pasture, fruits & nuts, vegetables, materials, medicinals & aromatic"
+round kumquat,6.5,7.5,"fruits & nuts, ornamentals/turf, medicinals & aromatic, environmental"
+rubber,4.5,6.0,"forage/pasture, fruits & nuts, materials, forest/wood, environmental"
+ruffle palm,5.0,6.5,"fruits & nuts, ornamentals/turf"
+rye,5.5,6.0,"cereals & pseudocereals, forage/pasture, cover crop, environmental"
+sago palm,5.5,6.5,"vegetables, forest/wood"
+salsify,6.5,7.5,vegetables
+sandalwood,6.0,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+sapodilla,6.0,7.0,"fruits & nuts, medicinals & aromatic, forest/wood"
+sapote,6.0,6.5,"fruits & nuts, forest/wood"
+saskatoon,5.5,7.0,"fruits & nuts, ornamentals/turf, medicinals & aromatic, environmental"
+scarlet eggplant,5.5,7.0,"vegetables, ornamentals/turf"
+scarlet wisteria tree,5.5,7.5,"forage/pasture, fruits & nuts, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+sea buckthorn,6.5,7.5,"fruits & nuts, medicinals & aromatic"
+sea kale,6.5,7.5,"vegetables, medicinals & aromatic"
+seaside brookweed,7.0,8.5,"vegetables, ornamentals/turf"
+serviceberry,6.0,8.0,"fruits & nuts, ornamentals/turf"
+showy milkweed,5.0,7.5,"vegetables, materials, medicinals & aromatic"
+sickle-leaved yellow-wood,5.0,7.0,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+slough grass,5.8,7.2,"cereals & pseudocereals, materials"
+small reed mace,4.5,8.0,"vegetables, materials, medicinals & aromatic, environmental"
+smooth loofah,5.5,6.5,"vegetables, materials"
+smooth pigweed,6.5,7.5,vegetables
+snake gourd,6.5,7.0,"vegetables, medicinals & aromatic"
+snotappel,5.0,7.0,"forage/pasture, fruits & nuts, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+sorva,4.5,6.0,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+sour cherry,6.0,6.5,"fruits & nuts, materials, forest/wood"
+sour orange,6.0,7.0,"fruits & nuts, materials, medicinals & aromatic"
+soursop,5.5,6.5,"fruits & nuts, vegetables, medicinals & aromatic, environmental"
+sow pea,5.5,6.5,"pulses (grain legumes), forage/pasture, vegetables, environmental"
+soya bean,5.5,6.5,pulses (grain legumes)
+spelt wheat,6.5,7.5,"cereals & pseudocereals, forage/pasture"
+spider flower,5.5,7.0,"forage/pasture, vegetables, materials, ornamentals/turf, medicinals & aromatic"
+spinach,6.0,7.5,vegetables
+squash,5.5,6.8,"vegetables, materials, environmental"
+star apple,5.0,6.5,"fruits & nuts, forest/wood"
+strawberry,6.0,6.8,fruits & nuts
+sugar apple,7.0,8.0,fruits & nuts
+sugarbeet,6.0,6.8,roots/tubers
+swamp milkweed,5.0,7.5,"vegetables, materials, ornamentals/turf, medicinals & aromatic"
+swede,5.5,7.0,"roots/tubers, forage/pasture"
+sweet corn,5.5,6.8,"forage/pasture, vegetables"
+sweet granadilla,6.0,7.0,fruits & nuts
+sweet pepper,5.5,6.8,"vegetables, medicinals & aromatic"
+tamarind,5.5,6.5,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood"
+tannia,5.5,7.0,roots/tubers
+taro,5.5,6.5,"roots/tubers, vegetables, ornamentals/turf"
+tef,5.5,6.5,"cereals & pseudocereals, materials"
+tepary bean,6.0,7.0,"pulses (grain legumes), cover crop"
+thabyay-hypyoo,5.5,7.0,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental, weed"
+thorny bamboo,4.5,6.5,"forage/pasture, vegetables, materials, environmental"
+thousand head kale,5.4,6.0,"forage/pasture, vegetables"
+tiger nut,5.0,7.0,"roots/tubers, weed"
+tomatillo,6.0,7.0,"vegetables, ornamentals/turf"
+tomato,5.5,6.8,"forage/pasture, vegetables, medicinals & aromatic"
+tooth brush tree,7.0,8.0,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+total,5.5,6.5,"fruits & nuts, materials, environmental"
+tree tomato,6.3,7.0,"fruits & nuts, materials, medicinals & aromatic"
+turmeric,6.0,7.0,"roots/tubers, medicinals & aromatic"
+ulluco,5.5,6.5,roots/tubers
+violet tree,5.0,7.0,"vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood"
+walnut,5.5,6.5,"fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood"
+wampee,5.0,6.0,"fruits & nuts, ornamentals/turf, medicinals & aromatic"
+wanza,5.0,6.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+water berry,5.5,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood"
+water chestnut,5.5,7.5,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic"
+water hyacinth,6.7,7.3,"forage/pasture, vegetables, materials, ornamentals/turf, environmental, weed"
+water primrose,5.5,7.0,"forage/pasture, vegetables, weed"
+water shamrock,6.5,7.5,"forage/pasture, vegetables, ornamentals/turf, weed"
+water spinach,5.0,7.0,"forage/pasture, vegetables"
+watercress,6.5,7.5,"vegetables, medicinals & aromatic"
+watermelon,6.0,7.0,"fruits & nuts, materials, medicinals & aromatic"
+wax gourd,5.6,6.8,fruits & nuts
+weeping podocarpus,5.5,6.5,"fruits & nuts, forest/wood"
+wheat,6.0,7.0,"cereals & pseudocereals, forage/pasture, medicinals & aromatic"
+white arrow arum,5.0,7.0,"vegetables, ornamentals/turf"
+white lupin,5.5,6.4,"pulses (grain legumes), materials, medicinals & aromatic"
+white oak,5.5,7.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, forest/wood, environmental"
+white yam,6.4,6.7,roots/tubers
+whitespot,5.5,7.0,"cereals & pseudocereals, forage/pasture, vegetables"
+wild carrot,5.8,6.8,"roots/tubers, forage/pasture, vegetables, materials, medicinals & aromatic"
+wild celery,6.0,6.8,"vegetables, medicinals & aromatic"
+wild crab,6.2,7.0,"fruits & nuts, medicinals & aromatic, forest/wood"
+wild custard apple,5.5,7.0,"forage/pasture, fruits & nuts, vegetables, materials, medicinals & aromatic"
+wild date palm,5.5,7.0,"forage/pasture, fruits & nuts, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+wild leek,6.0,6.5,vegetables
+wild lettuce,6.5,8.0,vegetables
+wild loquat,4.5,6.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+wild strawberry,5.0,6.0,"fruits & nuts, materials, medicinals & aromatic"
+winged bean,5.5,7.0,"pulses (grain legumes), roots/tubers, forage/pasture, vegetables, materials, cover crop, environmental"
+winter thorn,5.5,7.0,"forage/pasture, fruits & nuts, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+yam,6.0,6.5,roots/tubers
+yam bean,5.0,5.5,roots/tubers
+yeheb nut,6.5,7.5,"forage/pasture, fruits & nuts, forest/wood"
+yellow granadilla,5.5,6.5,fruits & nuts
+yellow mombin,5.5,6.5,"forage/pasture, fruits & nuts, materials, medicinals & aromatic, forest/wood, environmental"
+yellow plum,5.0,7.0,"fruits & nuts, vegetables, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+yellow water lily,6.5,7.5,"vegetables, ornamentals/turf, medicinals & aromatic"
+yemane,5.0,6.0,"forage/pasture, fruits & nuts, materials, ornamentals/turf, medicinals & aromatic, forest/wood, environmental"
+zombi pea,5.5,6.5,"pulses (grain legumes), roots/tubers, forage/pasture, vegetables, cover crop, environmental"
