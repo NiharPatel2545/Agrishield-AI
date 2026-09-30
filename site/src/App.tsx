@@ -8,7 +8,7 @@ import {
 // Points at your local FastAPI server during development. Change this ONE
 // constant to your deployed API URL when you deploy (e.g. Render/Railway) --
 // nothing else in this file needs to change.
-const API_BASE_URL = 'http://127.0.0.1:8000'
+const API_BASE_URL = 'https://agrishield-ai-production.up.railway.app'
 
 interface ScanResponse {
   location: { latitude: number; longitude: number }
