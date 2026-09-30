@@ -31,7 +31,7 @@ app = FastAPI(title="Agrishield API", version="0.1.0")
 # "*" is fine for local dev but permissive.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # TODO: replace with your real deployed frontend URL(s)
+    allow_origins=["https://agrishield-ai-production-0e42.up.railway.app/"],  # TODO: replace with your real deployed frontend URL(s)
     allow_methods=["GET"],
     allow_headers=["X-API-Key"],
 )
