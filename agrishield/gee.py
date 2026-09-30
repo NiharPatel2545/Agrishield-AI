@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+import os
+
 import ee
 
 from agrishield.config import GEE_PROJECT_ID
@@ -17,7 +20,29 @@ ELEVATION_IMG = "USGS/SRTMGL1_003"
 
 
 def initialize() -> str:
-    """Authenticate if needed, then initialise Earth Engine."""
+    """Initialise Earth Engine.
+
+    On a server (Railway) there is no browser, so we log in with a service
+    account whose JSON key lives in the GEE_SERVICE_ACCOUNT_JSON variable.
+    On your laptop that variable doesn't exist, so it falls back to the
+    normal browser login exactly as before.
+    """
+    key_json = os.environ.get("GEE_SERVICE_ACCOUNT_JSON")
+
+    if key_json:
+        info = json.loads(key_json)
+        credentials = ee.ServiceAccountCredentials(
+            info["client_email"], key_data=key_json
+        )
+        ee.Initialize(credentials, project=GEE_PROJECT_ID)
+        return GEE_PROJECT_ID
+
+    if os.environ.get("RAILWAY_ENVIRONMENT"):
+        raise RuntimeError(
+            "Running on Railway but GEE_SERVICE_ACCOUNT_JSON is not set. "
+            "Add it in the service's Variables tab."
+        )
+
     try:
         ee.Initialize(project=GEE_PROJECT_ID)
     except Exception:
