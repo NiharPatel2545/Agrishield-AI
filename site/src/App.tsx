@@ -3,7 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   CartesianGrid, Area, AreaChart,
 } from 'recharts'
-
+import agrishieldLogo from "./assets/agrishield-logo.png";
 // ─── Backend connection ────────────────────────────────────────────────────────
 // Points at your local FastAPI server during development. Change this ONE
 // constant to your deployed API URL when you deploy (e.g. Render/Railway) --
@@ -70,7 +70,7 @@ function Nav() {
         <a href="#mission" className="flex items-center gap-2.5 shrink-0">
         <div className="w-7 h-7 rounded-md overflow-hidden glow-green">
           <img
-            src="/favicon.png"
+            src={agrishieldLogo}
             alt="AgriShield"
             className="w-full h-full object-contain"
           />
