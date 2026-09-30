@@ -46,3 +46,8 @@ models/*.joblib
 # =========================
 *.tmp
 *.log
+# =========================
+# Cloud credentials
+# =========================
+*service-account*.json
+*-key.json
