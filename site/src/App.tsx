@@ -321,8 +321,8 @@ function Hero() {
 
           <h1 style={{ fontFamily: "'Barlow Condensed',sans-serif" }}
             className="text-[clamp(56px,9vw,100px)] font-extrabold leading-none tracking-tight text-white mb-6">
-            SEE BENEATH<br/>
-            <span className="shimmer-text">THE SURFACE.</span>
+            INTELLIGENCE<br/>
+            <span className="shimmer-text">BENEATH EVERY ACRE</span>
           </h1>
 
           <p className="text-slate-300 text-lg leading-relaxed mb-10 max-w-xl font-light">
